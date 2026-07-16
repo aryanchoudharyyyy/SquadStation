@@ -1,0 +1,103 @@
+# =====================================================================
+# SENSITIVE CONFIGURATIONS & SECRETS (ABSOLUTELY MUST IGNORE!)
+# =====================================================================
+# Ignore actual config-repo folder containing passwords and JWT keys
+config-repo/
+**/config-repo/
+
+# Ignore any standalone or environment secret files
+*.env
+*.secret
+*.key
+*.pem
+
+# (Optional Safety Net) If you ever mistakenly put secrets in local yml files
+# We ignore standard naming for override files while keeping main application.yml
+**/application-local.yml
+**/application-local.yaml
+**/application-prod.yml
+**/application-prod.yaml
+**/secrets.yml
+**/secrets.yaml
+
+# =====================================================================
+# MAVEN & COMPILED ARTIFACTS
+# =====================================================================
+target/
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+logs/
+**/logs/
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# =====================================================================
+# IDE & EDITOR FILES
+# =====================================================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+/out/
+
+# Eclipse / Spring Tool Suite (STS)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# =====================================================================
+# OPERATING SYSTEM FILES
+# =====================================================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
