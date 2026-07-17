@@ -46,6 +46,7 @@ public class OtpServiceImpl implements OtpService {
         userRepository.save(user);
         sendOtp(request.collegeEmail());
     }
+
     @Override
     public void login(String collegeEmail){
         userRepository.findByCollegeEmail(collegeEmail)

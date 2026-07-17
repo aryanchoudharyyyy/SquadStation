@@ -1,0 +1,66 @@
+package com.SquadStation.Group_service.serviceImpl;
+
+import com.SquadStation.Group_service.entity.Group;
+import com.SquadStation.Group_service.entity.GroupMember;
+import com.SquadStation.Group_service.exception.AlreadyGroupMemberException;
+import com.SquadStation.Group_service.exception.GroupNotFoundException;
+import com.SquadStation.Group_service.repository.GroupMemberRepository;
+import com.SquadStation.Group_service.repository.GroupRepository;
+import com.SquadStation.Group_service.service.GroupService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class GroupServiceImpl implements GroupService {
+    private final GroupRepository groupRepository;
+    private final GroupMemberRepository groupMemberRepository;
+    @Override
+    public Group createGroup(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
+        Group group = new Group();
+        group.setSourcePoint(sourcePoint);
+        group.setBoardingStation(boardingStation);
+        group.setTravelDate(travelDate);
+        group.setCreatedBy(userId);
+        Group saved = groupRepository.save(group);
+        return saved;
+
+    }
+
+    @Override
+    public void JoinGroup(Long groupId, Long userId){
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(()-> new GroupNotFoundException("Group not found"));
+        if (groupMemberRepository.existsByGroup_IdAndUserId(groupId,userId)){
+            throw  new AlreadyGroupMemberException("You are already a member of this group");
+
+        }
+        addMember(group,userId);
+    }
+    protected void addMember(Group group,Long userId){
+        GroupMember member = new GroupMember();
+        member.setGroup(group);
+        member.setUserId(userId);
+        groupMemberRepository.save(member);
+    }
+    @Override
+    public Optional<Group> findExistingGroupForUser(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
+        List<Group> groups = groupMemberRepository.findExistingGroup(userId, sourcePoint, boardingStation, travelDate);
+        return groups.isEmpty()? Optional.empty():Optional.of(groups.get(0));
+
+    }
+
+    @Override
+    public Optional<Group> findGroupForTripContext(String sourcePoint, String boardingStation, LocalDate travelDate) {
+        return groupRepository.findBySourcePointAndBoardingStationAndTravelDate(sourcePoint, boardingStation, travelDate);
+    }
+
+}
+
+
+
+
