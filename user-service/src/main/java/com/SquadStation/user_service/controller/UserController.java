@@ -55,7 +55,7 @@ public class UserController {
     public AuthResponse refreshToken(@RequestBody
                                      RefreshTokenRequest request){
         RefreshToken refreshToken = refreshTokenService.validateRefreshToken(request.refreshToken());
-        User user = userService.getById(refreshToken.getId());
+        User user = userService.getById(refreshToken.getUserId());
         String newAccessToken = jwtService.generateAccessToken(user.getId(), user.getCollegeEmail());
         return new AuthResponse(newAccessToken, refreshToken.getToken());
     }

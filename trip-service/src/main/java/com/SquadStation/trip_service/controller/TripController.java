@@ -1,5 +1,6 @@
 package com.SquadStation.trip_service.controller;
 
+import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
 import com.SquadStation.trip_service.entity.Trip;
 import com.SquadStation.trip_service.service.TripService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class TripController {
         return  tripService.postTrip(trip);
     }
     @GetMapping("/{tripId}/matches")
-    public List<Trip> getMatches(@PathVariable Long tripId){
+    public List<MatchedTripResponse> getMatches(@PathVariable Long tripId){
         return tripService.findMatches(tripId);
     }
 

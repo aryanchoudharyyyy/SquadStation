@@ -1,10 +1,11 @@
 package com.SquadStation.trip_service.service;
 
+import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
 import com.SquadStation.trip_service.entity.Trip;
 
 import java.util.List;
 
 public interface TripService {
     Trip postTrip(Trip trip);
-    List<Trip> findMatches(Long tripId);
+    List<MatchedTripResponse> findMatches(Long tripId);
 }

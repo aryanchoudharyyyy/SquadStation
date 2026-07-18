@@ -3,8 +3,24 @@ spring:
     name: trip-service
   config:
     import: configserver:http://localhost:8888
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+        group:
+          enabled: true
 
+resilience4j:
+    circuitbreaker:
+      instances:
+        group-service:
+          sliding-window-size: 10
+          minimum-number-of-calls: 5
+          failure-rate-threshold: 50
+          wait-duration-in-open-state: 10s
+          permitted-number-of-calls-in-half-open-state: 3
 
 server:
       port: 8082
+
 
