@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
-@FeignClient(name = "group-service", fallback = GroupServiceClientFallback.class)
+@FeignClient(name = "group-service")
 public interface GroupServiceClient {
     @GetMapping("/api/groups/existing")
     Group findExistingGroup(

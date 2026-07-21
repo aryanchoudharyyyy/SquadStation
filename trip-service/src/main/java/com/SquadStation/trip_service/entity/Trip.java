@@ -29,7 +29,5 @@ public class Trip {
     private String destination;
     private String vehicleNumber;
     @Column(nullable = false)
-    private LocalDate travelDate;
-    @Column(nullable = false)
-    private LocalTime travelTime;
+    private LocalDateTime travelDateTime;
 }

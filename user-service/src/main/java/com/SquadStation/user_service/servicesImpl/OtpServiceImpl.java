@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -79,6 +80,7 @@ public class OtpServiceImpl implements OtpService {
         return true;
 
     }
+    @Transactional
     @Scheduled(fixedRate = 600000)
     public void cleanupExpiredOtps(){
         otpVerificationRepository.deleteByExpiresAtBefore(LocalDateTime.now());

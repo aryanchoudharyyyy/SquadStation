@@ -11,14 +11,26 @@ spring:
           enabled: true
 
 resilience4j:
-    circuitbreaker:
-      instances:
-        group-service:
-          sliding-window-size: 10
-          minimum-number-of-calls: 5
-          failure-rate-threshold: 50
-          wait-duration-in-open-state: 10s
-          permitted-number-of-calls-in-half-open-state: 3
+  circuitbreaker:
+    instances:
+      group-service:
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+  retry:
+    instances:
+      group-service:
+        max-attempts: 3
+        wait-duration: 500ms
+
+feign:
+  client:
+    config:
+      group-service:
+        connect-timeout: 2000
+        read-timeout: 2000
 
 server:
       port: 8082

@@ -16,7 +16,7 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember,Long> {
         WHERE gm.userId = :userId
         AND gm.group.sourcePoint = :sourcePoint
         AND gm.group.boardingStation =:boardingStation
-        AND gm.group.travelDate =: travelDate
+        AND gm.group.travelDate =:travelDate
 """)
     List<Group> findExistingGroup( @Param("userId") Long userId,
                                    @Param("sourcePoint") String sourcePoint,

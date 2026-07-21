@@ -23,8 +23,9 @@ public class TripController {
         return  tripService.postTrip(trip);
     }
     @GetMapping("/{tripId}/matches")
-    public List<MatchedTripResponse> getMatches(@PathVariable Long tripId){
-        return tripService.findMatches(tripId);
+    public List<MatchedTripResponse> getMatches(@PathVariable Long tripId, HttpServletRequest request){
+        Long userId = (Long) request.getAttribute("userId");
+        return tripService.findMatches(tripId, userId);
     }
 
 }

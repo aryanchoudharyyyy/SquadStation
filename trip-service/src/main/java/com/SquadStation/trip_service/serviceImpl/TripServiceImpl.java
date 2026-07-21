@@ -1,13 +1,17 @@
 package com.SquadStation.trip_service.serviceImpl;
 
 import com.SquadStation.trip_service.client.Group;
+import com.SquadStation.trip_service.client.GroupLookupClient;
 import com.SquadStation.trip_service.client.GroupServiceClient;
 import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
 import com.SquadStation.trip_service.entity.Trip;
+import com.SquadStation.trip_service.event.TripCreatedEvent;
+import com.SquadStation.trip_service.event.TripEventPublisher;
 import com.SquadStation.trip_service.exception.TripNotFoundException;
 import com.SquadStation.trip_service.repository.TripRepository;
 import com.SquadStation.trip_service.service.TripService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -19,34 +23,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TripServiceImpl implements TripService {
     private final TripRepository tripRepository;
+    private final TripEventPublisher tripEventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
     private static final long WINDOW_HOURS =1;
-    private final GroupServiceClient groupServiceClient;
+    private final GroupLookupClient groupLookupClient;
 
     @Override
     public Trip postTrip(Trip trip){
-        return tripRepository.save(trip);
+        Trip saved = tripRepository.save(trip);
+        tripEventPublisher.publishTripCreated(new TripCreatedEvent(
+                saved.getId(), saved.getUserId(), saved.getSourcePoint(), saved.getBoardingStation(), saved.getTravelDateTime().toLocalDate()
+        ));   // This method saves the trip to the database, publishes a "Trip Created" event to RabbitMQ, and returns the saved trip.
+                return saved;
     }
     @Override
-    public List<MatchedTripResponse> findMatches(Long tripId){
+    public List<MatchedTripResponse> findMatches(Long tripId,Long requestingUserId){
         Trip trip = tripRepository.findById(tripId).orElseThrow(()->new TripNotFoundException("Trip Not found" + tripId));
-        LocalDateTime tripDateTime = LocalDateTime.of(trip.getTravelDate(), trip.getTravelTime());
-        LocalDateTime windowStart = tripDateTime.minusHours(WINDOW_HOURS);
-        LocalDateTime windowEnd = tripDateTime.plusHours(WINDOW_HOURS);
-        List<Trip> candidates = tripRepository.findCandidates(
-                trip.getId(),trip.getUserId(),trip.getSourcePoint(), trip.getBoardingStation(),
-                trip.getTravelDate().minusDays(1),trip.getTravelDate().plusDays(1)
-        );
-        List<Trip> matched= candidates.stream()
-                .filter(c->{
-                    LocalDateTime cdt = LocalDateTime.of(c.getTravelDate(), c.getTravelTime());
-                    return !cdt.isBefore(windowStart) && !cdt.isAfter(windowEnd);
-                })
-                .toList();
-        Group existingGroup = groupServiceClient.findExistingGroup(trip.getSourcePoint(),trip.getBoardingStation(),trip.getTravelDate());
-        Long existingGroupId =existingGroup!=null ? existingGroup.getId() : null;
-        return  matched.stream()
-                .map(m-> new MatchedTripResponse(m, existingGroupId))
-                .toList();
+       LocalDateTime windowStart = trip.getTravelDateTime().minusHours(WINDOW_HOURS);
+       LocalDateTime windowEnd = trip.getTravelDateTime().plusHours(WINDOW_HOURS);
+       List<Trip> matched = tripRepository.findCandidates(
+               trip.getId(), trip.getUserId(), trip.getSourcePoint(), trip.getBoardingStation(), windowStart, windowEnd
+       );
+       // groupLookupresult remaining
+       return matched.stream()
+               .map(m-> new MatchedTripResponse(m,lookupResult.groupId(), lookupResult.available()))
+               .toList();
     }
 
 }

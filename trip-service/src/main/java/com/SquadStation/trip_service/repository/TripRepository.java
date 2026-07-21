@@ -6,19 +6,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TripRepository extends JpaRepository<Trip,Long> {
     @Query("""
-           SELECT t 
+           SELECT t
            FROM Trip t
            WHERE t.id <> :tripId
            AND t.userId <> :userId
            AND t.sourcePoint =:sourcePoint
            AND t.boardingStation=:boardingStation
-           AND t.travelDate BETWEEN :dateFrom AND :dateTo
-           
+           AND t.travelDateTime BETWEEN :windowStart AND :windowEnd
+          
 
 """)
     List<Trip> findCandidates(
@@ -26,7 +27,18 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
             @Param("userId") Long userId,
             @Param("sourcePoint") String sourcePoint,
             @Param("boardingStation") String boardingStation,
-            @Param("dateFrom") LocalDate dateFrom,
-            @Param("dateTo") LocalDate dateTo
+            @Param("windowStart") LocalDateTime windowStart,
+            @Param("windowEnd") LocalDateTime windowEnd
           );
+    @Query("SELECT CASE WHEN COUNT(t)>0 THEN true ELSE false END FROM Trip t " +
+            "WHERE t.userId = :userId AND t.sourcePoint = :sourcePoint AND t.boardingStation = :boardingStation " +
+            "AND t.travelDateTime BETWEEN :dayStart AND :dayEnd"
+    )
+    boolean existsMatchingTrip(
+            @Param("userId") Long userId,
+            @Param("sourcePoint") String sourcePoint,
+            @Param("boardingStation") String boardingStation,
+            @Param("dayStart") LocalDateTime dayStart,
+            @Param("dayEnd") LocalDateTime dayEnd
+    );
 }

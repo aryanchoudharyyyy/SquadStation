@@ -3,6 +3,7 @@ package com.SquadStation.Group_service.serviceImpl;
 import com.SquadStation.Group_service.entity.Group;
 import com.SquadStation.Group_service.entity.GroupMember;
 import com.SquadStation.Group_service.exception.AlreadyGroupMemberException;
+import com.SquadStation.Group_service.exception.GroupAlreadyExistsException;
 import com.SquadStation.Group_service.exception.GroupNotFoundException;
 import com.SquadStation.Group_service.repository.GroupMemberRepository;
 import com.SquadStation.Group_service.repository.GroupRepository;
@@ -21,6 +22,9 @@ public class GroupServiceImpl implements GroupService {
     private final GroupMemberRepository groupMemberRepository;
     @Override
     public Group createGroup(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
+        if (groupRepository.findBySourcePointAndBoardingStationAndTravelDate(sourcePoint, boardingStation, travelDate).isPresent()) {
+            throw new GroupAlreadyExistsException("A group for this trip already exists — join it instead of creating a new one");
+        }
         Group group = new Group();
         group.setSourcePoint(sourcePoint);
         group.setBoardingStation(boardingStation);
