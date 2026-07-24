@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController()
@@ -26,6 +27,12 @@ public class TripController {
     public List<MatchedTripResponse> getMatches(@PathVariable Long tripId, HttpServletRequest request){
         Long userId = (Long) request.getAttribute("userId");
         return tripService.findMatches(tripId, userId);
+    }
+    @GetMapping("/user-has-matching-trip")
+    public boolean userHasMatchingTrip(@RequestParam Long userId, @RequestParam String sourcePoint,
+                                       @RequestParam String boardingStation, @RequestParam LocalDate travelDate){
+        return  tripService.userHasMatchingTrip(userId,sourcePoint,boardingStation,travelDate);
+
     }
 
 }

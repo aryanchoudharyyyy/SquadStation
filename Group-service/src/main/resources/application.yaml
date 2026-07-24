@@ -6,3 +6,38 @@ spring:
 
 server:
   port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, circuitbreakers, circuitbreakerevents, retries
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      trip-service:
+        register-health-indicator: true   # naya
+        sliding-window-type: COUNT_BASED   # naya, explicit kiya
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+  retry:
+    instances:
+      trip-service:
+        max-attempts: 3
+        wait-duration: 500ms
+feign:
+  client:
+    config:
+      trip-service:
+        connect-timeout: 2000
+        read-timeout: 2000

@@ -1,4 +1,5 @@
-package com.SquadStation.trip_service.config;
+package com.SquadStation.Group_service.config;
+
 
 import feign.RequestInterceptor;
 
@@ -8,8 +9,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Configuration
-
-
 public class FeignConfig {
 
     @Bean

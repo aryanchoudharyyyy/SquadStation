@@ -2,6 +2,7 @@ package com.SquadStation.trip_service.serviceImpl;
 
 import com.SquadStation.trip_service.client.Group;
 import com.SquadStation.trip_service.client.GroupLookupClient;
+import com.SquadStation.trip_service.client.GroupLookupResult;
 import com.SquadStation.trip_service.client.GroupServiceClient;
 import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
 import com.SquadStation.trip_service.entity.Trip;
@@ -15,6 +16,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -38,16 +40,27 @@ public class TripServiceImpl implements TripService {
     }
     @Override
     public List<MatchedTripResponse> findMatches(Long tripId,Long requestingUserId){
+
+
         Trip trip = tripRepository.findById(tripId).orElseThrow(()->new TripNotFoundException("Trip Not found" + tripId));
+
        LocalDateTime windowStart = trip.getTravelDateTime().minusHours(WINDOW_HOURS);
        LocalDateTime windowEnd = trip.getTravelDateTime().plusHours(WINDOW_HOURS);
+
        List<Trip> matched = tripRepository.findCandidates(
                trip.getId(), trip.getUserId(), trip.getSourcePoint(), trip.getBoardingStation(), windowStart, windowEnd
        );
-       // groupLookupresult remaining
+        GroupLookupResult lookupResult = groupLookupClient.findExistingGroup(
+                trip.getSourcePoint(), trip.getBoardingStation(), trip.getTravelDateTime().toLocalDate()
+        );
        return matched.stream()
                .map(m-> new MatchedTripResponse(m,lookupResult.groupId(), lookupResult.available()))
                .toList();
     }
-
+    @Override
+    public boolean userHasMatchingTrip(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
+        LocalDateTime dayStart =travelDate.atStartOfDay();
+        LocalDateTime dayEnd = travelDate.atTime(23,59,59);
+        return tripRepository.existsMatchingTrip(userId, sourcePoint, boardingStation,dayStart, dayEnd);
+    }
 }

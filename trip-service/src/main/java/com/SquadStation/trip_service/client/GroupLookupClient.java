@@ -14,13 +14,15 @@ public class GroupLookupClient {
 //    public GroupLookupClient(GroupServiceClient groupServiceClient){
 //        this.groupServiceClient=groupServiceClient;
 //    }
-    @Retry(name="group-service")
-    @CircuitBreaker(name = "group-service", fallbackMethod = "fallback")
-    public Group findExistingGroup(String sourcePoint, String boardingStation, LocalDate travelDate){
-        return groupServiceClient.findExistingGroup(sourcePoint, boardingStation, travelDate);
+    @Retry(name="Group-service")
+    @CircuitBreaker(name = "Group-service", fallbackMethod = "fallback")
+    public GroupLookupResult findExistingGroup(String sourcePoint, String boardingStation, LocalDate travelDate){
+        Group group = groupServiceClient.findExistingGroup(sourcePoint,boardingStation,travelDate);
+        Long groupId = group != null ? group.getId():null;
+        return new GroupLookupResult(groupId,true);
     }
-    private Group fallback(String sourcePoint, String boardingStation, LocalDate travelDate,  Throwable t){
-        return null;
+    private GroupLookupResult fallback(String sourcePoint, String boardingStation, LocalDate travelDate,  Throwable t){
+        return new GroupLookupResult(null, false);
     }
 
 }

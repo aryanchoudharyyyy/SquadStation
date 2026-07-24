@@ -1,10 +1,12 @@
 package com.SquadStation.Group_service.serviceImpl;
 
+import com.SquadStation.Group_service.client.TripLookupClient;
 import com.SquadStation.Group_service.entity.Group;
 import com.SquadStation.Group_service.entity.GroupMember;
 import com.SquadStation.Group_service.exception.AlreadyGroupMemberException;
 import com.SquadStation.Group_service.exception.GroupAlreadyExistsException;
 import com.SquadStation.Group_service.exception.GroupNotFoundException;
+import com.SquadStation.Group_service.exception.TripMismatchException;
 import com.SquadStation.Group_service.repository.GroupMemberRepository;
 import com.SquadStation.Group_service.repository.GroupRepository;
 import com.SquadStation.Group_service.service.GroupService;
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class GroupServiceImpl implements GroupService {
     private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
+    private final TripLookupClient tripLookupClient;
     @Override
     public Group createGroup(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
         if (groupRepository.findBySourcePointAndBoardingStationAndTravelDate(sourcePoint, boardingStation, travelDate).isPresent()) {
@@ -42,6 +45,12 @@ public class GroupServiceImpl implements GroupService {
         if (groupMemberRepository.existsByGroup_IdAndUserId(groupId,userId)){
             throw  new AlreadyGroupMemberException("You are already a member of this group");
 
+        }
+        boolean hasMatchingTrip = tripLookupClient.userHasMatchTrip(
+                userId, group.getSourcePoint(), group.getBoardingStation(), group.getTravelDate()
+        );
+        if(!hasMatchingTrip){
+            throw new TripMismatchException("You don't have a trip matching this group's route and date");
         }
         addMember(group,userId);
     }
