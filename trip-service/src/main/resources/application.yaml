@@ -9,6 +9,19 @@ spring:
         enabled: true
         group:
           enabled: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-16-character-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
 management:
   endpoints:
     web:
@@ -46,5 +59,6 @@ feign:
 
 server:
       port: 8082
+
 
 

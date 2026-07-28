@@ -64,6 +64,10 @@ public class UserController {
         refreshTokenService.revokeToken(request.refreshToken());
         return "Logged out successfully";
     }
+    @GetMapping("/{userId}/email")
+    public String getEmailByUserId(@PathVariable Long userId){
+        return userService.getById(userId).getCollegeEmail();
+    }
 
 
 

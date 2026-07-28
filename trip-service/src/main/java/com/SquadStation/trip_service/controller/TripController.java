@@ -1,6 +1,7 @@
 package com.SquadStation.trip_service.controller;
 
 import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
+import com.SquadStation.trip_service.dto.Response.TripCreationResponse;
 import com.SquadStation.trip_service.entity.Trip;
 import com.SquadStation.trip_service.service.TripService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import java.util.List;
 public class TripController {
     private final TripService tripService;
     @PostMapping
-    public Trip postTrip(@RequestBody Trip trip, HttpServletRequest request){
+    public TripCreationResponse postTrip(@RequestBody Trip trip, HttpServletRequest request){
         Long userId = (Long) request.getAttribute("userId");
         trip.setUserId(userId);
         return  tripService.postTrip(trip);
