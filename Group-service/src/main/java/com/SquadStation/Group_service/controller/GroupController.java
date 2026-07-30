@@ -38,4 +38,10 @@ public class GroupController {
                 .orElse(ResponseEntity.noContent().build());
 
     }
+    @GetMapping("/{groupId}/is-member")
+    public  boolean isMember(@PathVariable Long groupId, @RequestParam Long userId){
+        return groupService.isMember(groupId, userId);
+
+    }
+
 }

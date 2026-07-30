@@ -9,17 +9,6 @@ spring:
         enabled: true
         group:
           enabled: true
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: your-email@gmail.com
-    password: your-16-character-app-password
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
 
 
 management:
@@ -33,10 +22,12 @@ management:
   health:
     circuitbreakers:
       enabled: true
+    mail: # <-- ADD THIS
+      enabled: false    # <-- ADD THIS
 resilience4j:
   circuitbreaker:
     instances:
-      group-service:
+      Group-service:
         register-health-indicator: true
         sliding-window-type: COUNT_BASED
         sliding-window-size: 10
@@ -46,14 +37,14 @@ resilience4j:
         permitted-number-of-calls-in-half-open-state: 3
   retry:
     instances:
-      group-service:
+      Group-service:
         max-attempts: 3
         wait-duration: 500ms
 
 feign:
   client:
     config:
-      group-service:
+      Group-service:
         connect-timeout: 2000
         read-timeout: 2000
 

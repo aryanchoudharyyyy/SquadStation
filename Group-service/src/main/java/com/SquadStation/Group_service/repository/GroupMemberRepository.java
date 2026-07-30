@@ -10,17 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface GroupMemberRepository extends JpaRepository<GroupMember,Long> {
-    @Query("""
-        SELECT gm.group
-        FROM GroupMember gm
-        WHERE gm.userId = :userId
-        AND gm.group.sourcePoint = :sourcePoint
-        AND gm.group.boardingStation =:boardingStation
-        AND gm.group.travelDate =:travelDate
-""")
-    List<Group> findExistingGroup( @Param("userId") Long userId,
-                                   @Param("sourcePoint") String sourcePoint,
-                                   @Param("boardingStation") String boardingStation,
-                                   @Param("travelDate") LocalDate travelDate);
+
     boolean existsByGroup_IdAndUserId(Long groupId, Long userId);
 }

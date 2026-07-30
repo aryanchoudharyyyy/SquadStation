@@ -60,16 +60,15 @@ public class GroupServiceImpl implements GroupService {
         member.setUserId(userId);
         groupMemberRepository.save(member);
     }
-    @Override
-    public Optional<Group> findExistingGroupForUser(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
-        List<Group> groups = groupMemberRepository.findExistingGroup(userId, sourcePoint, boardingStation, travelDate);
-        return groups.isEmpty()? Optional.empty():Optional.of(groups.get(0));
 
-    }
 
     @Override
     public Optional<Group> findGroupForTripContext(String sourcePoint, String boardingStation, LocalDate travelDate) {
         return groupRepository.findBySourcePointAndBoardingStationAndTravelDate(sourcePoint, boardingStation, travelDate);
+    }
+    @Override
+    public  boolean isMember(Long groupId, Long userId){
+        return  groupMemberRepository.existsByGroup_IdAndUserId(groupId,userId);
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface GroupService {
     Group createGroup(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate);
     void JoinGroup(Long groupId, Long userId);
-    Optional<Group> findExistingGroupForUser(Long userId, String sourcePoint,String boardingStation,LocalDate travelDate);
+
     Optional<Group> findGroupForTripContext(String sourcePoint,String boardStation,LocalDate travelDate);
+    boolean isMember(Long groupId, Long userId);
 }

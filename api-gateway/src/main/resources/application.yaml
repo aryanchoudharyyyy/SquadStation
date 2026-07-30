@@ -21,6 +21,12 @@ spring:
               uri: lb://group-service
               predicates:
                   - Path=/api/groups/**
+            - id: chatMessage-service-route
+              uri: lb://chat-service
+              predicates:
+                - Path=/api/chat/**
+
+
 
 eureka:
   client:
