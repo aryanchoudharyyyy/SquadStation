@@ -32,8 +32,9 @@ public class WebSocketAuthInterceptor implements ChannelInterceptor {
                 Claims claims = Jwts.parser().verifyWith(key).build()
                         .parseSignedClaims(authHeader.substring(7)).getPayload();
                 Number userIdRaw = claims.get("userId", Number.class);
+                accessor.setUser(()-> String.valueOf(userIdRaw));
                 accessor.getSessionAttributes().put("userId", userIdRaw!= null?userIdRaw.longValue() : null);
-
+                accessor.getSessionAttributes().put("jwtToken", authHeader);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Invalid or expired token");
             }

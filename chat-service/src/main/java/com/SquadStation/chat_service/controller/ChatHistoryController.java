@@ -21,9 +21,10 @@ public class ChatHistoryController {
     @GetMapping("/group/{groupId}/history")
     public List<ChatMessage> getHistory(@PathVariable Long groupId, HttpServletRequest request){
         Long userId =(Long) request.getAttribute("userId");
-        if(!membershipVerifier.isMember(groupId,userId)){
+        String token = request.getHeader("Authorization");
+        if(!membershipVerifier.isMember(groupId,userId,token)){
             throw  new NotGroupMemberException("You are not a member of this group ");
         }
-        return chatMessageRepository.findByGroupIdOrderBySentAtAsc(groupId);
+        return chatMessageRepository.findByGroupIdOrderBySendAtAsc(groupId);
     }
 }

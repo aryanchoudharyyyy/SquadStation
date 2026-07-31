@@ -34,6 +34,7 @@ public class GroupServiceImpl implements GroupService {
         group.setTravelDate(travelDate);
         group.setCreatedBy(userId);
         Group saved = groupRepository.save(group);
+        addMember(saved, userId);
         return saved;
 
     }

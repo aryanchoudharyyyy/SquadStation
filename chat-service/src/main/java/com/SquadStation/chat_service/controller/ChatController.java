@@ -9,6 +9,8 @@ import com.SquadStation.chat_service.exception.NotGroupMemberException;
 import com.SquadStation.chat_service.repository.ChatMessageRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -29,13 +31,15 @@ public class ChatController {
     private  final ChatMessageRepository chatMessageRepository;
     private  final SimpMessagingTemplate messagingTemplate;
     private final MembershipVerifier membershipVerifier;
+    private static final Logger log = LoggerFactory.getLogger(ChatController.class);
 
     @MessageMapping("/chat.sendMessage")
     public  void sendMessage(@Payload ChatMessageRequest request, SimpMessageHeaderAccessor headerAccessor){
 
 
         Long senderId =(Long) headerAccessor.getSessionAttributes().get("userId");
-        if (!membershipVerifier.isMember(request.groupId(),senderId)){
+        String token = (String) headerAccessor.getSessionAttributes().get("jwtToken");
+        if (!membershipVerifier.isMember(request.groupId(),senderId,token)){
             throw new NotGroupMemberException("You are not a member of this group");
         }
         ChatMessage message = new ChatMessage();
@@ -48,8 +52,16 @@ public class ChatController {
     }
     @MessageExceptionHandler
     @SendToUser("/queue/errors")
-    public  String handleException(BaseApiException ex){
+    public String handleException(BaseApiException ex) {
+        log.warn("Chat error: {}", ex.getMessage());
         return ex.getMessage();
+    }
+
+    @MessageExceptionHandler
+    @SendToUser("/queue/errors")
+    public String handleUnexpectedException(Exception ex) {
+        log.error("Unexpected chat error", ex);
+        return "Something went wrong. Please try again.";
     }
 
 
