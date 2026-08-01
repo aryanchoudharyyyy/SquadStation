@@ -13,4 +13,5 @@ public interface GroupService {
     Optional<Group> findGroupForTripContext(String sourcePoint,String boardStation,LocalDate travelDate);
     boolean isMember(Long groupId, Long userId);
     GroupMembersResponse getGroupMembers(Long groupId, Long requestingUserId);
+    void leaveGroup(Long groupId, Long userId);
 }

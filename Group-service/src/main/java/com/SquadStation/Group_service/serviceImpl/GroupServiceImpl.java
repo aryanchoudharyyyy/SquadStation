@@ -12,6 +12,7 @@ import com.SquadStation.Group_service.repository.GroupRepository;
 import com.SquadStation.Group_service.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -85,6 +86,20 @@ public class GroupServiceImpl implements GroupService {
                 .map(UserSummaryDTO::name)
                 .toList();
         return new GroupMembersResponse(names.size(), names);
+    }
+
+    @Override
+    @Transactional
+    public void leaveGroup(Long groupId, Long userId) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(()->new GroupNotFoundException("Group not found: "+ groupId));
+        if(!groupMemberRepository.existsByGroup_IdAndUserId(groupId, userId)){
+            throw new NotGroupMemberException("You are not a member of this group");
+        }
+        groupMemberRepository.deleteByGroup_IdAndUserId(groupId, userId);
+        long remainingMembers = groupMemberRepository.countByGroup_Id(groupId);
+        if (remainingMembers==0) groupRepository.delete(group);
+
     }
 }
 

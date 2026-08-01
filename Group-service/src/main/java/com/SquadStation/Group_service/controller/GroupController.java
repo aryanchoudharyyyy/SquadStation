@@ -50,5 +50,11 @@ public class GroupController {
         Long userId = (Long) request.getAttribute("userId");
         return groupService.getGroupMembers(groupId,userId);
     }
+    @PostMapping("/{groupId}/leave")
+    public  String leaveGroup(@PathVariable Long groupId, HttpServletRequest request){
+        Long userId = (Long) request.getAttribute("userId");
+        groupService.leaveGroup(groupId,userId);
+        return "Left group successfully";
+    }
 
 }
