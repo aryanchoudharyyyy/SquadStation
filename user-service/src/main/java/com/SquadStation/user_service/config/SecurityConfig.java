@@ -23,7 +23,8 @@ public class SecurityConfig {
                         auth-> auth.requestMatchers
                                         ("/api/users/signup",
                                         "/api/users/login","/api/users/verify-otp" ,
-                                                        "/api/users/refresh-token","/api/users/logout")
+                                                        "/api/users/refresh-token","/api/users/logout"
+                                        ,"/swagger-ui/**","/v3/api-docs/**")
                         .permitAll().anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
                 return http.build();
