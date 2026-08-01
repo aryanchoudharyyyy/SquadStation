@@ -6,6 +6,7 @@ import com.SquadStation.user_service.dto.Request.SignupRequest;
 import com.SquadStation.user_service.dto.Request.VerifyOtpRequest;
 import com.SquadStation.user_service.dto.Response.AuthResponse;
 import com.SquadStation.user_service.dto.Response.UserResponseDTO;
+import com.SquadStation.user_service.dto.Response.UserSummaryDTO;
 import com.SquadStation.user_service.entity.RefreshToken;
 import com.SquadStation.user_service.entity.User;
 import com.SquadStation.user_service.security.JwtService;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -69,7 +71,10 @@ public class UserController {
         return userService.getById(userId).getCollegeEmail();
     }
 
-
+    @GetMapping("/batch")
+    public List<UserSummaryDTO> getUsersByIds(@RequestParam List<Long> ids){
+        return userService.getUsersByIds(ids);
+    }
 
 
 }

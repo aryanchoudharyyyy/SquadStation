@@ -1,9 +1,11 @@
 package com.SquadStation.Group_service.controller;
 
 import com.SquadStation.Group_service.dto.Request.CreateGroupRequest;
+import com.SquadStation.Group_service.dto.Response.GroupMembersResponse;
 import com.SquadStation.Group_service.entity.Group;
 import com.SquadStation.Group_service.service.GroupService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.Path;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,11 @@ public class GroupController {
     public  boolean isMember(@PathVariable Long groupId, @RequestParam Long userId){
         return groupService.isMember(groupId, userId);
 
+    }
+    @GetMapping("/{groupId}/members")
+    public GroupMembersResponse getMembers(@PathVariable Long groupId, HttpServletRequest request){
+        Long userId = (Long) request.getAttribute("userId");
+        return groupService.getGroupMembers(groupId,userId);
     }
 
 }

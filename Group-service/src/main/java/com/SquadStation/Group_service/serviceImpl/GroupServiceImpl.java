@@ -1,12 +1,12 @@
 package com.SquadStation.Group_service.serviceImpl;
 
 import com.SquadStation.Group_service.client.TripLookupClient;
+import com.SquadStation.Group_service.client.UserLookupClient;
+import com.SquadStation.Group_service.client.UserSummaryDTO;
+import com.SquadStation.Group_service.dto.Response.GroupMembersResponse;
 import com.SquadStation.Group_service.entity.Group;
 import com.SquadStation.Group_service.entity.GroupMember;
-import com.SquadStation.Group_service.exception.AlreadyGroupMemberException;
-import com.SquadStation.Group_service.exception.GroupAlreadyExistsException;
-import com.SquadStation.Group_service.exception.GroupNotFoundException;
-import com.SquadStation.Group_service.exception.TripMismatchException;
+import com.SquadStation.Group_service.exception.*;
 import com.SquadStation.Group_service.repository.GroupMemberRepository;
 import com.SquadStation.Group_service.repository.GroupRepository;
 import com.SquadStation.Group_service.service.GroupService;
@@ -23,6 +23,8 @@ public class GroupServiceImpl implements GroupService {
     private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
     private final TripLookupClient tripLookupClient;
+    private final UserLookupClient userLookupClient;
+
     @Override
     public Group createGroup(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
         if (groupRepository.findBySourcePointAndBoardingStationAndTravelDate(sourcePoint, boardingStation, travelDate).isPresent()) {
@@ -71,7 +73,19 @@ public class GroupServiceImpl implements GroupService {
     public  boolean isMember(Long groupId, Long userId){
         return  groupMemberRepository.existsByGroup_IdAndUserId(groupId,userId);
     }
-
+    @Override
+    public GroupMembersResponse getGroupMembers(Long groupId, Long requestingUserId){
+        if(!groupMemberRepository.existsByGroup_IdAndUserId(groupId,requestingUserId)){
+            throw  new NotGroupMemberException("You are not a member of this group");
+        }
+        List<Long> userIds = groupMemberRepository.findByGroup_Id(groupId).stream()
+                .map(GroupMember::getUserId)
+                .toList();
+        List<String> names = userLookupClient.getUsersByIds(userIds).stream()
+                .map(UserSummaryDTO::name)
+                .toList();
+        return new GroupMembersResponse(names.size(), names);
+    }
 }
 
 
