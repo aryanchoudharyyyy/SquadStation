@@ -9,6 +9,7 @@ import com.SquadStation.user_service.dto.Response.UserResponseDTO;
 import com.SquadStation.user_service.dto.Response.UserSummaryDTO;
 import com.SquadStation.user_service.entity.RefreshToken;
 import com.SquadStation.user_service.entity.User;
+import com.SquadStation.user_service.exception.InvalidOtpException;
 import com.SquadStation.user_service.security.JwtService;
 import com.SquadStation.user_service.services.OtpService;
 import com.SquadStation.user_service.services.RefreshTokenService;
@@ -46,7 +47,10 @@ public class UserController {
     }
     @PostMapping("/verify-otp")
     public AuthResponse verifyOtp(@RequestBody VerifyOtpRequest request){
-        otpService.verifyOtp(request.collegeEmail(), request.otp());
+         boolean verified=otpService.verifyOtp(request.collegeEmail(), request.otp());
+         if(!verified){
+             throw new InvalidOtpException("Invalid or Expired Otp");
+         }
 
         User user = userService.getByCollegeEmail(request.collegeEmail());
         String accessToken = jwtService.generateAccessToken(user.getId(), user.getCollegeEmail());
