@@ -1,9 +1,14 @@
 server:
+  address: 127.0.0.1
   port: 8888
 
 spring:
   profiles:
     active: native
+  security:
+    user:
+      name: ${CONFIG_SERVER_USERNAME}
+      password: ${CONFIG_SERVER_PASSWORD}
 
   cloud:
     config:
