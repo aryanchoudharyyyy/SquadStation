@@ -1,5 +1,6 @@
 package com.SquadStation.marketplace_service.client;
 
+import com.SquadStation.marketplace_service.exception.UserServiceUnavailableException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,6 @@ public class UserLookupClient {
     }
 
     private List<UserSummaryDTO> fallback(List<Long> ids, Throwable t){
-        throw new UserServiceUnavailablException("Could not fetch user details right now");
+        throw new UserServiceUnavailableException("Could not fetch user details right now");
     }
 }

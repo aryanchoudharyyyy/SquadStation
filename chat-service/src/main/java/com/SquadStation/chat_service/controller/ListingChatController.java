@@ -7,6 +7,8 @@ import com.SquadStation.chat_service.exception.BaseApiException;
 import com.SquadStation.chat_service.repository.ListingMessageRepository;
 import com.SquadStation.chat_service.service.ListingConversationService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -21,6 +23,7 @@ public class ListingChatController {
     private final ListingMessageRepository messageRepository;
     private final ListingConversationService conversationService;
     private final SimpMessagingTemplate messagingTemplate;
+    private static final Logger log = LoggerFactory.getLogger(ListingChatController.class);
 
     @MessageMapping("/listing.sendMessage")
     public  void sendMessage(@Payload ListingMessageRequest request, SimpMessageHeaderAccessor headerAccessor) {
@@ -40,8 +43,13 @@ public class ListingChatController {
         @MessageExceptionHandler
         @SendToUser("/queue/errors")
         public String handleException(BaseApiException ex){
+        log.warn("Listing chat error: {}", ex.getMessage());
         return ex.getMessage();
-
-
+    }
+    @MessageExceptionHandler
+    @SendToUser("/queue/errors")
+    public  String handleUnexpectedException(Exception ex){
+        log.error("unexpected listing chat error", ex);
+        return "Something went wrong. Please try again";
     }
 }
