@@ -13,13 +13,15 @@ import com.SquadStation.user_service.services.OtpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+
 import java.util.Optional;
-import java.util.Random;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,12 @@ public class OtpServiceImpl implements OtpService {
     private final UserRepository userRepository;
     private final OtpVerificationRepository otpVerificationRepository;
     private static final int OTP_VALID_MINUTES=10;
+    private final PasswordEncoder passwordEncoder;
+    private static final int RESEND_COOLDOWN_SECONDS=30;
+    private static final int MAX_OTP_REQUESTS_PER_HOUR=20;
+    private static final int MAX_FAILED_ATTEMPTS=5;
+    private static final SecureRandom SECURE_RANDOM= new SecureRandom();
+    private final OtpMailServiceImpl otpMailService;
     @Value("${college.email-domain}")
     private String allowedDomain;
     @Override
@@ -55,22 +63,55 @@ public class OtpServiceImpl implements OtpService {
         sendOtp(collegeEmail);
     }
     private void sendOtp(String collegeEmail){
+        LocalDateTime now = LocalDateTime.now();
         OtpVerification otpEntry = otpVerificationRepository.findByCollegeEmail(collegeEmail)
                 .orElseGet(OtpVerification::new);
+        if (otpEntry.getLastSentAt()!= null && otpEntry.getLastSentAt().plusSeconds(RESEND_COOLDOWN_SECONDS).isAfter(now)){
+            throw new IllegalStateException(
+                    "Please wait before requesting another OTP"
+            );
+        }
+        if (otpEntry.getRequestWindowStartedAt() == null || otpEntry.getRequestWindowStartedAt().plusHours(1).isBefore(now)){
+            otpEntry.setRequestWindowStartedAt(now);
+            otpEntry.setRequestsInWindow(0);
+
+        }
+        if (otpEntry.getRequestsInWindow() >= MAX_OTP_REQUESTS_PER_HOUR){
+            throw  new IllegalStateException(
+                    "Maximum OTP Requests reached. Try again later."
+            );
+        }
+        String otp = String.valueOf(100000 + SECURE_RANDOM.nextInt(900000));
         otpEntry.setCollegeEmail(collegeEmail);
-        String otp = String.valueOf(100000 + new SecureRandom().nextInt(900000));
-        otpEntry.setOtpCode(otp);
+
+        otpEntry.setOtpHash(passwordEncoder.encode(otp));
+        otpEntry.setFailedAttempts(0);
         otpEntry.setExpiresAt(LocalDateTime.now().plusMinutes(OTP_VALID_MINUTES));
+        otpEntry.setLastSentAt(now);
+        otpEntry.setRequestsInWindow(otpEntry.getRequestsInWindow()+1);
         otpVerificationRepository.save(otpEntry);
-        System.out.println("OTP for "+collegeEmail+ "is :"+otp);
+
+        otpMailService.sendOtp(collegeEmail,otp);
+
     }
     @Override
+    @Transactional
     public boolean verifyOtp(String collegeEmail, String otp){
         OtpVerification otpEntry = otpVerificationRepository.findByCollegeEmail(collegeEmail).orElseThrow(
                 ()-> new OtpNotFoundException("No Otp request found for this email")
         );
-        if(otpEntry.getOtpCode()==null || !otpEntry.getOtpCode().equals(otp)) return false;
-        if(otpEntry.getExpiresAt().isBefore(LocalDateTime.now())) return false;
+
+        if(otpEntry.getExpiresAt().isBefore(LocalDateTime.now())){
+            otpVerificationRepository.delete(otpEntry);
+            return false;
+        }
+        if (otpEntry.getFailedAttempts()>= MAX_FAILED_ATTEMPTS){
+            otpVerificationRepository.delete(otpEntry);
+        }
+        if (!passwordEncoder.matches(otp,otpEntry.getOtpHash())){
+            otpEntry.setFailedAttempts(otpEntry.getFailedAttempts()+1);
+            otpVerificationRepository.save(otpEntry);
+        }
         User user=userRepository.findByCollegeEmail(collegeEmail).
                 orElseThrow(()->new UserNotFoundException("User not found"));
         user.setVerified(true);

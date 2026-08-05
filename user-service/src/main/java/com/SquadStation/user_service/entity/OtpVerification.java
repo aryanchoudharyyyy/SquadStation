@@ -16,7 +16,18 @@ public class OtpVerification {
     private Long id;
     @Column(nullable = false, unique = true)
     private String collegeEmail;
-    private String otpCode;
+    @Column(nullable = false)
+    private String otpHash;
+
+    @Column(nullable = false)
+    private int failedAttempts = 0;
+
+    private LocalDateTime lastSentAt;
+
+    @Column(nullable = false)
+    private int requestsInWindow = 0;
+
+    private LocalDateTime requestWindowStartedAt;
     private LocalDateTime expiresAt;
 
 }

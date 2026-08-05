@@ -14,6 +14,7 @@ import com.SquadStation.user_service.security.JwtService;
 import com.SquadStation.user_service.services.OtpService;
 import com.SquadStation.user_service.services.RefreshTokenService;
 import com.SquadStation.user_service.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -36,17 +37,17 @@ public class UserController {
         return UserResponseDTO.fromEntity(user);
     }
     @PostMapping("/signup")
-    public String signup(@RequestBody SignupRequest request){
+    public String signup(@Valid @RequestBody SignupRequest request){
         otpService.signup(request);
         return "OTP sent to your college email - verify to complete signup";
     }
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request){
+    public String login(@Valid@RequestBody LoginRequest request){
         otpService.login(request.collegeEmail());
-        return "OTP sent (check console for now)";
+        return "OTP sent successfully to your registered email";
     }
     @PostMapping("/verify-otp")
-    public AuthResponse verifyOtp(@RequestBody VerifyOtpRequest request){
+    public AuthResponse verifyOtp(@Valid @RequestBody VerifyOtpRequest request){
          boolean verified=otpService.verifyOtp(request.collegeEmail(), request.otp());
          if(!verified){
              throw new InvalidOtpException("Invalid or Expired Otp");
