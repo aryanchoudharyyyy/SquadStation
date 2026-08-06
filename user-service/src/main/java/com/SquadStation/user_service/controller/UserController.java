@@ -59,7 +59,7 @@ public class UserController {
         return new AuthResponse(accessToken, refreshToken.getToken());
     }
     @PostMapping("/refresh-token")
-    public AuthResponse refreshToken(@RequestBody
+    public AuthResponse refreshToken(@Valid @RequestBody
                                      RefreshTokenRequest request){
         RefreshToken refreshToken = refreshTokenService.validateRefreshToken(request.refreshToken());
         User user = userService.getById(refreshToken.getUserId());
@@ -67,7 +67,7 @@ public class UserController {
         return new AuthResponse(newAccessToken, refreshToken.getToken());
     }
     @PostMapping("/logout")
-    public String logout(@RequestBody RefreshTokenRequest request){
+    public String logout(@Valid @RequestBody RefreshTokenRequest request){
         refreshTokenService.revokeToken(request.refreshToken());
         return "Logged out successfully";
     }

@@ -6,6 +6,7 @@ import com.SquadStation.marketplace_service.entity.TicketListing;
 import com.SquadStation.marketplace_service.service.MarketplaceService;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class MarketplaceController {
     private final ServletRequest httpServletRequest;
 
     @PostMapping("/listings")
-    public TicketListing createListing(@RequestBody CreateListingRequest request, HttpServletRequest httpRequest){
+    public TicketListing createListing(@Valid @RequestBody CreateListingRequest request, HttpServletRequest httpRequest){
         return marketplaceService.createListing((Long) httpRequest.getAttribute("userId"),request);
     }
 

@@ -6,6 +6,7 @@ import com.SquadStation.chat_service.enitiy.ListingMessage;
 import com.SquadStation.chat_service.exception.BaseApiException;
 import com.SquadStation.chat_service.repository.ListingMessageRepository;
 import com.SquadStation.chat_service.service.ListingConversationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class ListingChatController {
     private static final Logger log = LoggerFactory.getLogger(ListingChatController.class);
 
     @MessageMapping("/listing.sendMessage")
-    public  void sendMessage(@Payload ListingMessageRequest request, SimpMessageHeaderAccessor headerAccessor) {
+    public  void sendMessage(@Valid @Payload ListingMessageRequest request, SimpMessageHeaderAccessor headerAccessor) {
         Long senderId = (Long) headerAccessor.getSessionAttributes().get("userId");
         conversationService.verifyAccess(request.conversationId(), senderId);
 

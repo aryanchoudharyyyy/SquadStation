@@ -2,9 +2,11 @@ package com.SquadStation.trip_service.controller;
 
 import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
 import com.SquadStation.trip_service.dto.Response.TripCreationResponse;
+import com.SquadStation.trip_service.dto.Request.CreateTripRequest;
 import com.SquadStation.trip_service.entity.Trip;
 import com.SquadStation.trip_service.service.TripService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Path;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,9 +21,16 @@ import java.util.List;
 public class TripController {
     private final TripService tripService;
     @PostMapping
-    public TripCreationResponse postTrip(@RequestBody Trip trip, HttpServletRequest request){
+    public TripCreationResponse postTrip(@Valid @RequestBody CreateTripRequest tripRequest, HttpServletRequest request){
         Long userId = (Long) request.getAttribute("userId");
+        Trip trip = new Trip();
         trip.setUserId(userId);
+        trip.setMode(tripRequest.mode());
+        trip.setSourcePoint(tripRequest.sourcePoint());
+        trip.setBoardingStation(tripRequest.boardingStation());
+        trip.setDestination(tripRequest.destination());
+        trip.setVehicleNumber(tripRequest.vehicleNumber());
+        trip.setTravelDateTime(tripRequest.travelDateTime());
         return  tripService.postTrip(trip);
     }
     @GetMapping("/{tripId}/matches")

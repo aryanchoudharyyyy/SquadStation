@@ -8,6 +8,7 @@ import com.SquadStation.chat_service.exception.BaseApiException;
 import com.SquadStation.chat_service.exception.NotGroupMemberException;
 import com.SquadStation.chat_service.repository.ChatMessageRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class ChatController {
     private static final Logger log = LoggerFactory.getLogger(ChatController.class);
 
     @MessageMapping("/chat.sendMessage")
-    public  void sendMessage(@Payload ChatMessageRequest request, SimpMessageHeaderAccessor headerAccessor){
+    public  void sendMessage(@Valid @Payload ChatMessageRequest request, SimpMessageHeaderAccessor headerAccessor){
 
 
         Long senderId =(Long) headerAccessor.getSessionAttributes().get("userId");
