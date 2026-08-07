@@ -33,6 +33,8 @@ public class UserController {
 
     @GetMapping("/me")
     public UserResponseDTO getMe(Authentication authentication) {
+        System.out.println("Authentication = " + authentication);
+        System.out.println("Name = " + authentication.getName());
         User user = userService.getByCollegeEmail(authentication.getName());
         return UserResponseDTO.fromEntity(user);
     }
@@ -70,15 +72,6 @@ public class UserController {
     public String logout(@Valid @RequestBody RefreshTokenRequest request){
         refreshTokenService.revokeToken(request.refreshToken());
         return "Logged out successfully";
-    }
-    @GetMapping("/{userId}/email")
-    public String getEmailByUserId(@PathVariable Long userId){
-        return userService.getById(userId).getCollegeEmail();
-    }
-
-    @GetMapping("/batch")
-    public List<UserSummaryDTO> getUsersByIds(@RequestParam List<Long> ids){
-        return userService.getUsersByIds(ids);
     }
 
 

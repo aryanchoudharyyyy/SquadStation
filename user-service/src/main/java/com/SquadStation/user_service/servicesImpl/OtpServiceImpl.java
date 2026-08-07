@@ -107,10 +107,12 @@ public class OtpServiceImpl implements OtpService {
         }
         if (otpEntry.getFailedAttempts()>= MAX_FAILED_ATTEMPTS){
             otpVerificationRepository.delete(otpEntry);
+            return false;
         }
         if (!passwordEncoder.matches(otp,otpEntry.getOtpHash())){
             otpEntry.setFailedAttempts(otpEntry.getFailedAttempts()+1);
             otpVerificationRepository.save(otpEntry);
+            return false;
         }
         User user=userRepository.findByCollegeEmail(collegeEmail).
                 orElseThrow(()->new UserNotFoundException("User not found"));
@@ -124,6 +126,9 @@ public class OtpServiceImpl implements OtpService {
     @Transactional
     @Scheduled(fixedRate = 600000)
     public void cleanupExpiredOtps(){
+        System.out.println("Scheduler Running...");
+
         otpVerificationRepository.deleteByExpiresAtBefore(LocalDateTime.now());
+        System.out.println("Deleted");
     }
 }
