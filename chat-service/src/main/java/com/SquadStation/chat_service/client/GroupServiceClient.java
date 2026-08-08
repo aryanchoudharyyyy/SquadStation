@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "group-service")
 public interface GroupServiceClient {
-    @GetMapping("/api/groups/{groupId}/is-member")
+    @GetMapping("/api/internal/groups/{groupId}/is-member")
     boolean isMember(@PathVariable("groupId") Long groupId, @RequestParam("userId") Long userId, @RequestHeader("Authorization") String token);
 }

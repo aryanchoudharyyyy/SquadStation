@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @FeignClient(name = "group-service")
 public interface GroupServiceClient {
-    @GetMapping("/api/groups/existing")
+    @GetMapping("/api/internal/groups/existing")
     Group findExistingGroup(
             @RequestParam("sourcePoint") String sourcePoint,
             @RequestParam("boardingStation") String boardingStation,

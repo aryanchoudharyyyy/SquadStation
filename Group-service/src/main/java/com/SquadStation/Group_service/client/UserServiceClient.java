@@ -8,6 +8,6 @@ import java.util.List;
 
 @FeignClient(name = "user-service")
 public interface UserServiceClient {
-    @GetMapping("/api/users/batch")
+    @GetMapping("/api/internal/users/batch")
     List<UserSummaryDTO> getUserByIds(@RequestParam("ids") List<Long> ids);
 }

@@ -26,6 +26,10 @@ spring:
               uri: lb://group-service
               predicates:
                   - Path=/api/groups/**
+            - id: internal-group-route
+              uri: lb://group-service
+              predicates:
+                - Path=/api/internal/groups/**
             - id: chatMessage-service-route
               uri: lb://chat-service
               predicates:
