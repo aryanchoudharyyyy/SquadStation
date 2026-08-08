@@ -51,9 +51,5 @@ public class MarketplaceController {
     public List<String> getInterestedUsers(@PathVariable Long listingId , HttpServletRequest httpServletRequest){
         return marketplaceService.getInterestedUsers(listingId, (Long) httpServletRequest.getAttribute("userId"));
     }
-    @GetMapping("/listings/{listingId}/owner")
-    public Long getListingOwner(@PathVariable Long listingId){
-        return marketplaceService.getListingOwner(listingId);
-    }
 
 }

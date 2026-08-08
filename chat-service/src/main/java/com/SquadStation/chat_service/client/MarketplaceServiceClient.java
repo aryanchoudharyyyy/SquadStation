@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "marketplace-service")
 public interface MarketplaceServiceClient {
-    @GetMapping("/api/marketplace/listings/{listingId}/owner")
+    @GetMapping("/api/internal/marketplace/listings/{listingId}/owner")
     Long getListingOwner(@PathVariable("listingId") Long listingId);
 }
 
