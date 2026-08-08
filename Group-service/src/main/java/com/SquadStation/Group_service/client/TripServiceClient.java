@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @FeignClient(name = "trip-service")
 public interface TripServiceClient {
-    @GetMapping("/api/trips/user-has-matching-trip")
+    @GetMapping("/api/internal/trips/user-has-matching-trip")
     boolean userHasMatchingTrip(@RequestParam("userId") Long userId,
                                 @RequestParam("sourcePoint") String sourcePoint,
                                 @RequestParam("boardingStation") String boardingStation,

@@ -38,11 +38,6 @@ public class TripController {
         Long userId = (Long) request.getAttribute("userId");
         return tripService.findMatches(tripId, userId);
     }
-    @GetMapping("/user-has-matching-trip")
-    public boolean userHasMatchingTrip(@RequestParam Long userId, @RequestParam String sourcePoint,
-                                       @RequestParam String boardingStation, @RequestParam LocalDate travelDate){
-        return  tripService.userHasMatchingTrip(userId,sourcePoint,boardingStation,travelDate);
 
-    }
 
 }

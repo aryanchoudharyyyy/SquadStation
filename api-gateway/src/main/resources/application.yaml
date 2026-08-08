@@ -13,6 +13,10 @@ spring:
               uri: lb://trip-service
               predicates:
                 - Path=/api/trips/**
+            - id: internal-trip-route
+              uri: lb://trip-service
+              predicates:
+                - Path=/api/internal/trips/**
             - id: user-service-route
               uri: lb://user-service
               predicates:
