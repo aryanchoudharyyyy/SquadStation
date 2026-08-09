@@ -9,7 +9,15 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "chat_messages")
+@Table(
+        name = "chat_messages",
+        indexes = {
+                @Index(
+                        name = "idx_chat_messages_group_time_id",
+                        columnList = "group_id, send_at, id"
+                )
+        }
+)
 public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

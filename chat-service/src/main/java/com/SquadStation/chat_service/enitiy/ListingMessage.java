@@ -8,8 +8,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@NoArgsConstructor
-@Table(name = "listing_messages")
+@NoArgsConstructor@Table(
+        name = "listing_messages",
+        indexes = {
+                @Index(
+                        name = "idx_listing_messages_conversation_time_id",
+                        columnList = "conversation_id, sent_at, id"
+                )
+        }
+)
 public class ListingMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
