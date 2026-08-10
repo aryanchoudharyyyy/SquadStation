@@ -1,6 +1,7 @@
 package com.SquadStation.chat_service.config;
 
 import com.SquadStation.chat_service.security.WebSocketAuthInterceptor;
+import com.SquadStation.chat_service.security.WebSocketSubscriptionInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
@@ -13,11 +14,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final WebSocketAuthInterceptor webSocketAuthInterceptor;
+    private final WebSocketSubscriptionInterceptor webSocketSubscriptionInterceptor;
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
         registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();
 
     }
+
+
+
     @Override
     public  void configureMessageBroker(MessageBrokerRegistry registry){
         registry.enableSimpleBroker("/topic", "/queue");
@@ -25,7 +30,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration){
-        registration.interceptors(webSocketAuthInterceptor);
+        registration.interceptors(webSocketAuthInterceptor, webSocketSubscriptionInterceptor);
     }
 
 }
