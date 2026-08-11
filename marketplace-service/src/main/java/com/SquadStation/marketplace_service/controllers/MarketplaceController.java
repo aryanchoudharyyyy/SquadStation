@@ -8,6 +8,9 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -26,16 +29,16 @@ public class MarketplaceController {
     }
 
     @GetMapping("/listings")
-    public List<ListingResponse> browseListings(){
-        return  marketplaceService.browseListings();
+    public Page<ListingResponse> browseListings(@PageableDefault(size=20) Pageable pageable){
+        return  marketplaceService.browseListings(pageable);
     }
     @GetMapping("/listings/search")
-    public List<ListingResponse> searchListings(@RequestParam String source, @RequestParam String destination,@RequestParam LocalDate travelDate){
-        return marketplaceService.searchListings(source, destination, travelDate);
+    public Page<ListingResponse> searchListings(@RequestParam String source, @RequestParam String destination,@RequestParam LocalDate travelDate, @PageableDefault(size=20) Pageable pageable){
+        return marketplaceService.searchListings(source, destination, travelDate,pageable);
     }
     @GetMapping("/listings/mine")
-    public List<ListingResponse> getMyListings(HttpServletRequest httpRequest){
-        return marketplaceService.getMyListings((Long) httpRequest.getAttribute("userId"));
+    public Page<ListingResponse> getMyListings(HttpServletRequest httpRequest,@PageableDefault(size = 20) Pageable pageable){
+        return marketplaceService.getMyListings((Long) httpRequest.getAttribute("userId"),pageable);
     }
     @PatchMapping("/listings/{listingid}")
     public String deleteListing(@PathVariable Long listingid, HttpServletRequest httpServletRequest){
@@ -48,8 +51,11 @@ public class MarketplaceController {
         return "Interest recorder";
     }
     @GetMapping("/listings/{listingId}/interested-users")
-    public List<String> getInterestedUsers(@PathVariable Long listingId , HttpServletRequest httpServletRequest){
-        return marketplaceService.getInterestedUsers(listingId, (Long) httpServletRequest.getAttribute("userId"));
+    public Page<String> getInterestedUsers(
+            @PathVariable Long listingId,
+            HttpServletRequest httpServletRequest,
+            @PageableDefault(size = 20) Pageable pageable) {
+        return marketplaceService.getInterestedUsers(listingId, (Long) httpServletRequest.getAttribute("userId"),pageable);
     }
 
 }

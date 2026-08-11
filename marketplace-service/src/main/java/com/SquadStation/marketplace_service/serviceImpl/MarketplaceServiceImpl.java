@@ -10,14 +10,20 @@ import com.SquadStation.marketplace_service.exception.AlreadyExpressedInterestEx
 import com.SquadStation.marketplace_service.exception.CannotExpressInterestInOwnListingException;
 import com.SquadStation.marketplace_service.exception.ListingNotFoundException;
 import com.SquadStation.marketplace_service.exception.NotListingOwnerException;
+import com.SquadStation.marketplace_service.repository.InterestCountProjection;
 import com.SquadStation.marketplace_service.repository.ListingInterestRepository;
 import com.SquadStation.marketplace_service.repository.TicketListingRepository;
 import com.SquadStation.marketplace_service.service.MarketplaceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,20 +50,22 @@ public class MarketplaceServiceImpl implements MarketplaceService {
     }
 
     @Override
-    public List<ListingResponse> browseListings() {
-        return listingRepository.findByActiveTrueOrderByPostedAtDesc().stream().map(this::toResponse).toList();
+    public Page<ListingResponse> browseListings(Pageable pageable) {
+        Page<TicketListing> page = listingRepository.findByActiveTrueOrderByPostedAtDesc(pageable);
+        return mapToResponsePage(page);
     }
 
     @Override
-    public List<ListingResponse> searchListings(String source, String destination, LocalDate travelDate) {
+    public Page<ListingResponse> searchListings(String source, String destination, LocalDate travelDate, Pageable pageable) {
+        Page<TicketListing> page =listingRepository.findByActiveTrueAndSourceAndDestinationAndTravelDate(source, destination, travelDate,pageable);
+        return mapToResponsePage(page);
 
-        return listingRepository.findByActiveTrueAndSourceAndDestinationAndTravelDate(source, destination, travelDate)
-                .stream().map(this::toResponse).toList();
     }
 
     @Override
-    public List<ListingResponse> getMyListings(Long userId) {
-        return listingRepository.findByPostedByUserId(userId).stream().map(this::toResponse).toList();
+    public Page<ListingResponse> getMyListings(Long userId,Pageable pageable) {
+        Page<TicketListing> page = listingRepository.findByPostedByUserId(userId, pageable);
+        return mapToResponsePage(page);
     }
 
     @Override
@@ -89,10 +97,23 @@ public class MarketplaceServiceImpl implements MarketplaceService {
     }
 
     @Override
-    public List<String> getInterestedUsers(Long listingId, Long ownerUserId) {
+    public Page<String> getInterestedUsers(Long listingId, Long ownerUserId,Pageable pageable) {
         getOwnedListing(listingId, ownerUserId);
-        List<Long> userIds = interestRepository.findByListing_Id(listingId).stream().map(ListingInterest::getUserId).toList();
-        return  userLookupClient.getUserByIds(userIds).stream().map(UserSummaryDTO::name).toList();
+        Page<ListingInterest> interestsPage = interestRepository.findByListing_Id(listingId,pageable);
+        if (interestsPage.isEmpty()){
+            return Page.empty();
+        }
+        // 3. Extract the user IDs for just this page
+
+        List<Long> userIds = interestsPage.getContent().stream()
+                .map(ListingInterest::getUserId)
+                .toList();
+        // 4. Safely call the User Service with a small, manageable list of IDs
+        List<String> userNames = userLookupClient.getUserByIds(userIds).stream()
+                .map(UserSummaryDTO::name)
+                .toList();
+        // 5. Wrap the result back into a Page object so the frontend knows how many total pages exist
+        return new PageImpl<>(userNames, pageable, interestsPage.getTotalElements());
     }
 
     @Override
@@ -112,11 +133,33 @@ public class MarketplaceServiceImpl implements MarketplaceService {
         }
         return listing;
     }
-    private ListingResponse toResponse(TicketListing l){
-        int interestedCount = interestRepository.findByListing_Id(l.getId()).size();
+    private ListingResponse toResponse(TicketListing l,Map<Long, Integer> countsMap){
+
+        int interestedCount = countsMap.getOrDefault(l.getId(),0);
         return  new ListingResponse(l.getId(), l.getPostedByUserId(),l.getListingType(), l.getStatus(),
                 l.getTicketClass(),l.getSource(),l.getDestination(),l.getTravelDate(),l.getPrice(),
         l.getQuantity(),l.getDescription(),l.isActive(),l.getPostedAt(), interestedCount);
+    }
+    private Page<ListingResponse> mapToResponsePage(Page<TicketListing> page){
+        if (page.isEmpty()){
+            return Page.empty();
+        }
+        // 1. Get all listing IDs for just this page
+        List<Long> listingIds = page.getContent().stream()
+                .map(TicketListing::getId)
+                .toList();
+        // 2. Fetch interest counts in ONE query (Ensure you added this to ListingInterestRepository)
+        List< InterestCountProjection> countsList = interestRepository.countInterestsByListingIds(listingIds);
+        // 3. Convert to Map for instant lookup
+        Map<Long,Integer> countMap =countsList.stream().collect(
+                Collectors.toMap(
+                        InterestCountProjection::getListingId,
+                        InterestCountProjection::getCount
+                )
+        );
+        return page.map(listing ->toResponse(listing, countMap));
+
+
     }
 }
 
