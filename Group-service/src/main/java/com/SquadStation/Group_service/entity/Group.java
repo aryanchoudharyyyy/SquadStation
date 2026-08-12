@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "groups")
+@Table(name = "groups",
+uniqueConstraints = @UniqueConstraint(columnNames = {"sourcePoint", "boardingStation", "travelDate"}))
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

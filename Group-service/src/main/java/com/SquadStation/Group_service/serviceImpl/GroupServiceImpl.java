@@ -11,6 +11,7 @@ import com.SquadStation.Group_service.repository.GroupMemberRepository;
 import com.SquadStation.Group_service.repository.GroupRepository;
 import com.SquadStation.Group_service.service.GroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ public class GroupServiceImpl implements GroupService {
     private final UserLookupClient userLookupClient;
 
     @Override
+    @Transactional
     public Group createGroup(Long userId, String sourcePoint, String boardingStation, LocalDate travelDate){
         if (groupRepository.findBySourcePointAndBoardingStationAndTravelDate(sourcePoint, boardingStation, travelDate).isPresent()) {
             throw new GroupAlreadyExistsException("A group for this trip already exists — join it instead of creating a new one");
@@ -36,9 +38,13 @@ public class GroupServiceImpl implements GroupService {
         group.setBoardingStation(boardingStation);
         group.setTravelDate(travelDate);
         group.setCreatedBy(userId);
-        Group saved = groupRepository.save(group);
-        addMember(saved, userId);
-        return saved;
+        try {
+            Group saved = groupRepository.save(group);
+            addMember(saved, userId);
+            return saved;
+        } catch (DataIntegrityViolationException e) {
+            throw new GroupAlreadyExistsException("A group for this trip already exists — join it instead of creating a new one");
+        }
 
     }
 
