@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -81,6 +82,7 @@ public class MarketplaceServiceImpl implements MarketplaceService {
     }
 
     @Override
+    @Transactional
     public void expressInternet(Long listingId, Long userId) {
         TicketListing listing =listingRepository.findById(listingId)
                 .orElseThrow(()-> new ListingNotFoundException("Listing not found: "+ listingId));
@@ -93,7 +95,11 @@ public class MarketplaceServiceImpl implements MarketplaceService {
         ListingInterest interest = new ListingInterest();
         interest.setListing(listing);
         interest.setUserId(userId);
-        interestRepository.save(interest);
+        try {
+            interestRepository.save(interest);
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            throw new AlreadyExpressedInterestException("You have already express interest in this listing");
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.SquadStation.chat_service.repository.ListingMessageRepository;
 import com.SquadStation.chat_service.service.ListingConversationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,18 +22,28 @@ public class ListingConversationServiceImpl implements ListingConversationServic
     private final ListingMessageRepository messageRepository;
     private final MarketplaceLookupClient marketplaceLookupClient;
     @Override
+    @Transactional
     public ListingConversation getOrCreateConversation(Long listingId, Long requestingUserId) {
         Long ownerId = marketplaceLookupClient.getListingOwner(listingId);
         if (ownerId.equals(requestingUserId)){
             throw  new CannotMessageOwnListingException("You cannot start a conversation about your own listing");
         }
-        return conversationRepository.findByListingIdAndBuyerId(listingId, requestingUserId)
-                .orElseGet(()->{
-                    ListingConversation c = new ListingConversation();
-                    c.setListingId(listingId);
-                    c.setBuyerId(requestingUserId);
-                    return conversationRepository.save(c);
-                });
+        
+        java.util.Optional<ListingConversation> existing = conversationRepository.findByListingIdAndBuyerId(listingId, requestingUserId);
+        if (existing.isPresent()) {
+            return existing.get();
+        }
+
+        ListingConversation c = new ListingConversation();
+        c.setListingId(listingId);
+        c.setBuyerId(requestingUserId);
+        
+        try {
+            return conversationRepository.save(c);
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return conversationRepository.findByListingIdAndBuyerId(listingId, requestingUserId)
+                    .orElseThrow(() -> new IllegalStateException("Conversation could not be fetched after duplicate creation attempt", e));
+        }
     }
 
     @Override
