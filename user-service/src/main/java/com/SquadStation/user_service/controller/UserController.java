@@ -63,10 +63,13 @@ public class UserController {
     @PostMapping("/refresh-token")
     public AuthResponse refreshToken(@Valid @RequestBody
                                      RefreshTokenRequest request){
-        RefreshToken refreshToken = refreshTokenService.validateRefreshToken(request.refreshToken());
-        User user = userService.getById(refreshToken.getUserId());
+        // 1. Validate the incoming raw token (which checks the hash in DB)
+        RefreshToken validTokenInfo = refreshTokenService.validateRefreshToken(request.refreshToken());
+        User user = userService.getById(validTokenInfo.getUserId());
         String newAccessToken = jwtService.generateAccessToken(user.getId(), user.getCollegeEmail());
-        return new AuthResponse(newAccessToken, refreshToken.getToken());
+        // 2. Rotate the refresh token (overwrites the old hash in DB with a new one)
+        RefreshToken newRefreshToken = refreshTokenService.createRefreshToken(user.getId());
+        return new AuthResponse(newAccessToken, newRefreshToken.getToken());
     }
     @PostMapping("/logout")
     public String logout(@Valid @RequestBody RefreshTokenRequest request){
