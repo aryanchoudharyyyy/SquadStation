@@ -34,10 +34,7 @@ spring:
               uri: lb://group-service
               predicates:
                 - Path=/api/internal/groups/**
-            - id: chatMessage-service-route
-              uri: lb://chat-service
-              predicates:
-                - Path=/api/chat/**
+
             - id: chat-service-route
               uri: lb://chat-service
               predicates:
@@ -45,7 +42,7 @@ spring:
             - id: marketplace-service-route
               uri: lb://marketplace-service
               predicates:
-                - Path=/marketplace-service/**
+                - Path=/api/marketplace/**
             - id: internal-marketplace-route
               uri: lb://marketplace-service
               predicates:
