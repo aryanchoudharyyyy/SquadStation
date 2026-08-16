@@ -14,4 +14,4 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///C:/Users/Aryan Choudhary/Documents/config-repo
+          search-locations: file:///C:/Users/Aryan Choudhary/Documents/Projects/SquadStation/config-repo
