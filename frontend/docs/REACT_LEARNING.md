@@ -25,8 +25,10 @@ Learn React from scratch by building SquadStation. Focus on project-based, pract
 - [ ] Ref (`useRef`)
 
 ## 📝 Progress
-* **Concepts Learned:** Project Analysis, JSX & Component Structure, React Router
-* **Currently Learning:** Git Version Control (Professional Workflow)
-* **Completed Features:** Phase 1 (Foundation & Routing)
+* **Concepts Learned:** Project Analysis, JSX, Components, Router, Git, State (`useState`), Controlled Components
+* **Currently Learning:** Conditional Rendering
+* **Completed Features:** Phase 1 (Foundation), Base Auth Screens (Login, Signup)
+
+
 
 

@@ -7,6 +7,7 @@ import Home  from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
 import Splash  from './pages/Splash'
 import Login from './pages/Login'
+import Signup from './pages/SignUp'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Splash />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/home' element={<Home />}/>
+        <Route path='/signup' element={<Signup />}/>
       </Routes>
     </>
   )
