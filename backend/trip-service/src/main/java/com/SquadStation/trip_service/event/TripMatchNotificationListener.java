@@ -1,6 +1,7 @@
 package com.SquadStation.trip_service.event;
 
 import com.SquadStation.trip_service.dto.Response.MatchedTripResponse;
+import jakarta.transaction.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 
@@ -9,7 +10,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 
 @Component
@@ -21,7 +23,7 @@ public class TripMatchNotificationListener {
       private final JavaMailSender mailSender;
 
     @Async
-    @EventListener
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onTripMatched(TripMatchedEvent event){
         for (MatchedTripResponse matched:event.getMatchedExistingTrips()){
             try{
