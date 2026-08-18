@@ -8,7 +8,10 @@ import com.SquadStation.user_service.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +37,15 @@ public class UserServiceImpl implements UserService {
                 .map(u-> new UserSummaryDTO(u.getId(), u.getName()))
                 .toList();
     }
+
+    @Override
+    public Map<Long, String> getEmailsByUserIds(List<Long> userIds) {
+        if (userIds == null || userIds.isEmpty()){
+            return Collections.emptyMap();
+        }
+        return userRepository.findByIdIn(userIds).stream()
+                .filter(u->u.getCollegeEmail() !=null)
+                .collect(Collectors.toMap(User::getId, User::getCollegeEmail, (existing, replacement) -> existing));
+    }
+
 }
