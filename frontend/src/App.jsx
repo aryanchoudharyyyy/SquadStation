@@ -7,7 +7,9 @@ import Home  from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
 import Splash  from './pages/Splash'
 import Login from './pages/Login'
-import Signup from './pages/SignUp'
+import Signup from './pages/Signup'
+import OtpVerification from './pages/OtpVerification'
+import ProtectedRoute from './components/ProtectedRoute'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -16,8 +18,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Splash />}/>
         <Route path='/login' element={<Login />}/>
-        <Route path='/home' element={<Home />}/>
+       
         <Route path='/signup' element={<Signup />}/>
+        <Route path='/otpVerification' element={<OtpVerification />} />
+        <Route path='/home' element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
       </Routes>
     </>
   )
