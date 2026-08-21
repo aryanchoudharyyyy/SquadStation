@@ -10,19 +10,25 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import OtpVerification from './pages/OtpVerification'
 import ProtectedRoute from './components/ProtectedRoute'
+import Layout from './components/Layout'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <Routes>
+     <Routes>
+        {/* === UNPROTECTED ROUTES (Anyone can access) === */}
         <Route path='/' element={<Splash />}/>
         <Route path='/login' element={<Login />}/>
-       
         <Route path='/signup' element={<Signup />}/>
         <Route path='/otpVerification' element={<OtpVerification />} />
-        <Route path='/home' element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
+        {/* === PROTECTED ROUTES (Bouncer + Navbar Layout) === */}
+        <Route element={<ProtectedRoute> <Layout /> </ProtectedRoute>}>
+            <Route path='/home' element={<Home />}/>
+            {/* When we build Profile or Trips later, we will just add them right here! */}
+        </Route>
       </Routes>
+
     </>
   )
 }
