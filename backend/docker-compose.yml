@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # INFRASTRUCTURE (DB & Message Broker)
+  # ==========================================
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      # Aap chahein toh specific databases bash script se bana sakte hain,
+      # ya Hibernate auto-ddl se manage kar lenge
+    ports:
+      - "5432:5432"
+    volumes:
+      # Ye line docker ko bolegi ki start hote hi in saare databases ko create kar de
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # App communication port
+      - "15672:15672" # RabbitMQ UI port
+
+  # ==========================================
+  # CORE SERVICES (Eureka, Config, Gateway)
+  # ==========================================
+  config-server:
+    build:
+      context: ./ConfigServer
+    container_name: config-server
+    ports:
+      - "8888:8888"
+
+  eureka-server:
+    build:
+      context: ./EurekaService
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+
+  # ==========================================
+  # BUSINESS SERVICES
+  # ==========================================
+  user-service:
+    build:
+      context: ./user-service
+    container_name: user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres-db
+      - eureka-server
+
+  trip-service:
+    build:
+      context: ./trip-service
+    container_name: trip-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres-db
+      - eureka-server
+      - rabbitmq
+
+  group-service:
+    build:
+      context: ./Group-service
+    container_name: group-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - postgres-db
+      - eureka-server
+      - rabbitmq
+
+  chat-service:
+    build:
+      context: ./chat-service
+    container_name: chat-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres-db
+      - eureka-server
+
+  marketplace-service:
+    build:
+      context: ./marketplace-service
+    container_name: marketplace-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - postgres-db
