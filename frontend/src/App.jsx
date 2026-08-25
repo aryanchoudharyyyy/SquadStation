@@ -11,8 +11,11 @@ import Signup from './pages/Signup'
 import OtpVerification from './pages/OtpVerification'
 import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
+import Marketplace from './pages/Marketplace'
+import ListingDetail from './pages/ListingDetail'
+import Footer from './components/Footer'
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
@@ -25,8 +28,11 @@ function App() {
         {/* === PROTECTED ROUTES (Bouncer + Navbar Layout) === */}
         <Route element={<ProtectedRoute> <Layout /> </ProtectedRoute>}>
             <Route path='/home' element={<Home />}/>
+            <Route path='/marketplace' element={<Marketplace />} />
+            <Route path= 'marketplace/:id' element={<ListingDetail />} />
             {/* When we build Profile or Trips later, we will just add them right here! */}
         </Route>
+        
       </Routes>
 
     </>
