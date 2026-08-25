@@ -26,8 +26,9 @@ Learn React from scratch by building SquadStation. Focus on project-based, pract
 
 ## 📝 Progress
 * **Concepts Learned:** JSX, Components, Router, Git, State, Controlled Components, `useEffect`, `useRef`, Context API, Protected Routes, Layouts (`<Outlet>`)
-* **Currently Learning:** API Calls (Axios, Promises, `async/await`)
-* **Completed Features:** Phase 1 (Foundation), Phase 2 (Auth Flow), Phase 3 (Core Navigation)
+* **Concepts Learned:** JSX, Components, Router, Git, State, `useEffect`, `useRef`, Context API, Protected Routes, Layouts, Props, List Rendering, Derived State
+* **Currently Learning:** Dynamic Routing (`useParams`)
+* **Completed Features:** Phase 1 (Foundation), Phase 2 (Auth Flow), Phase 3 (Core Nav), Dashboard UI, Marketplace UI
 
 
 
