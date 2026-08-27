@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { Ticket, User, Settings, LogOut, ChevronDown} from "lucide-react";
+import "../styles/Navbar.css";
 import { useState, useEffect, useRef } from "react";
 
 
