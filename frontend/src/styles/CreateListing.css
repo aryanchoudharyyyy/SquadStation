@@ -30,6 +30,7 @@
   cursor: pointer;
   transition: color 0.2s;
 }
+
 .cl-breadcrumb-link:hover {
   color: var(--color-primary-hover);
   text-decoration: underline;
@@ -354,7 +355,7 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 input[type="number"] {
-  -moz-appearance: textfield;
+  appearance: none;
 }
 
 .cl-price-input:focus {
