@@ -1,8 +1,8 @@
-@import './styles/Auth.css';
+﻿@import './styles/Auth.css';
 @import './styles/Navbar.css';
 @import './styles/Home.css';
 @import './styles/Marketplace.css';
 @import './styles/ListingDetail.css';
 @import './styles/CreateListing.css';
-
+@import './styles/Profile.css';
 /* App.css is now clean! All component styles are safely stored in the src/styles folder. */
