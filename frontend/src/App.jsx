@@ -14,6 +14,9 @@ import Layout from './components/Layout'
 import Marketplace from './pages/Marketplace'
 import ListingDetail from './pages/ListingDetail'
 import Footer from './components/Footer'
+import CreateListing from './pages/CreateListing'
+import Profile from './pages/Profile'
+import MyListings from './pages/MyListings'
 function App() {
   
 
@@ -29,7 +32,10 @@ function App() {
         <Route element={<ProtectedRoute> <Layout /> </ProtectedRoute>}>
             <Route path='/home' element={<Home />}/>
             <Route path='/marketplace' element={<Marketplace />} />
-            <Route path= 'marketplace/:id' element={<ListingDetail />} />
+            <Route path='/marketplace/create' element={<CreateListing />} />
+            <Route path='marketplace/:id' element={<ListingDetail />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/my-listings' element={<MyListings />} />
             {/* When we build Profile or Trips later, we will just add them right here! */}
         </Route>
         

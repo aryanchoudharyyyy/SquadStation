@@ -43,7 +43,7 @@ function Navbar(){
             </button>
             <button className="nav-link" onClick={()=>
                 navigate("/marketplace")}>Marketplace</button>
-            <button className="nav-link" onClick={()=> navigate("/trips")}>My Listings</button>
+            <button className="nav-link" onClick={()=> navigate("/my-listings")}>My Listings</button>
             </div>
            <div className="nav-profile-container" ref={dropdownRef}>
             <button className="profile-btn" onClick={()=> setIsDropdownOpen(!isDropdownOpen)}>
