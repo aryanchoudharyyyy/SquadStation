@@ -1,0 +1,284 @@
+/* src/styles/Profile.css */
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.pr-animate { animation: fadeInUp 0.4s ease-out both; }
+
+/* ── Page Layout ── */
+.pr-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* ── Profile Header ── */
+.pr-header-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 32px;
+}
+
+.pr-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pr-user-info {
+    flex: 1;
+}
+
+.pr-user-info h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+.pr-meta-row {
+    display: flex;
+    gap: 16px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+.pr-meta-row span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pr-btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.pr-btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+/* ── Tabs ── */
+.pr-tabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 32px;
+}
+
+.pr-tab {
+    background: none;
+    border: none;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.pr-tab:hover { color: #0f172a; }
+
+.pr-tab.active {
+    color: #2563eb;
+}
+.pr-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2563eb;
+    border-radius: 2px 2px 0 0;
+}
+
+/* ── Ticket Grid ── */
+.pr-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 24px;
+}
+
+.pr-ticket-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.2s ease;
+}
+.pr-ticket-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.pr-ticket-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.pr-ticket-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bg-blue { background: #eff6ff; }
+.text-blue { color: #3b82f6; }
+.bg-green { background: #f0fdf4; }
+.text-green { color: #22c55e; }
+
+.pr-ticket-title { flex: 1; }
+.pr-ticket-title h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+}
+.pr-time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.pr-ticket-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #16a34a;
+}
+
+/* ── Route ── */
+.pr-ticket-route {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+.route-city {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+.text-gray { color: #cbd5e1; }
+.pr-ticket-date {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+/* ── Actions & Interest Badge ── */
+.pr-ticket-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+}
+
+.pr-interest-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    background: #f8fafc;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+.pr-interest-badge.has-interest {
+    color: #c2410c;
+    background: #fff7ed;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.pr-interest-badge.has-interest:hover { background: #ffedd5; }
+
+.pr-action-btns {
+    display: flex;
+    gap: 8px;
+}
+.pr-icon-btn {
+    background: white;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.pr-icon-btn:hover { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
+.pr-icon-btn.delete:hover { background: #fef2f2; color: #ef4444; border-color: #fca5a5; }
+
+/* ── Empty State ── */
+.pr-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+}
+.pr-empty-state p {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+.pr-btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .pr-header-card { flex-direction: column; text-align: center; }
+    .pr-meta-row { justify-content: center; flex-wrap: wrap; }
+    .pr-listings-grid { grid-template-columns: 1fr; }
+}
