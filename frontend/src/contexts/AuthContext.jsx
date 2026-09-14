@@ -1,10 +1,11 @@
 import { createContext, useState, useContext } from "react";
 const AuthContext = createContext();
-export function AuthProvider({ children}){
+export function AuthProvider({ children }){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [email, setEmail] = useState("");
+    const [user, setUser] = useState(null);   // { id, name, email }
     return (
-        <AuthContext.Provider  value = {{ isLoggedIn, setIsLoggedIn, email, setEmail}}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, email, setEmail, user, setUser }}>
             {children}
         </AuthContext.Provider>
     );

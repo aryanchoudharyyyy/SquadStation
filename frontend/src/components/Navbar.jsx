@@ -38,8 +38,8 @@ function Navbar(){
             <button className="nav-link" onClick={()=> navigate("/trips")}>
                 Trips
             </button>
-             <button className="nav-link" onClick={()=> navigate("/groups")}>
-                Groups
+             <button className="nav-link" onClick={()=> navigate("/chats")}>
+                Chats
             </button>
             <button className="nav-link" onClick={()=>
                 navigate("/marketplace")}>Marketplace</button>

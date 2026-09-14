@@ -17,10 +17,12 @@
 }
 
 .marketplace-hero h1 {
-  font-size: 24px;
-  font-weight: 700;
+  font-family: ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
 }
 
 .marketplace-hero p {

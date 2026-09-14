@@ -14,22 +14,22 @@ const myListings = [
 
 const myTrips = [
     {
-        id: 101,
-        mode: "TRAIN",
-        sourcePoint: "Rajiv Chowk",
-        boardingStation: "New Delhi Railway",
-        travelDateTime: "2024-10-24T10:30:00",
-        vehicleNumber: "12951",
-        destination: "Mumbai Central"
+        id: 1,
+        sourcePoint: "KIET Gate",
+        boardingStation: "Ghaziabad Railway Station",
+        finalDestination: "Mumbai Central",
+        travelDate: "2026-09-15",
+        travelTime: "06:30 AM",
+        postedBy: "Aryan C."
     },
     {
-        id: 102,
-        mode: "BUS",
-        sourcePoint: "Campus",
-        boardingStation: "Station",
-        travelDateTime: "2024-05-29T08:00:00",
-        vehicleNumber: null,
-        destination: null
+        id: 2,
+        sourcePoint: "KIET Hostel",
+        boardingStation: "New Delhi Railway Station",
+        finalDestination: "Lucknow Charbagh",
+        travelDate: "2026-09-18",
+        travelTime: "09:00 PM",
+        postedBy: "Sneha P."
     }
 ];
 

@@ -19,8 +19,9 @@ import Profile from './pages/Profile'
 import MyListings from './pages/MyListings'
 import PostTrip from './pages/PostTrip'
 import TripMatches from './pages/TripMatches'
-import DevChat from './components/DevChat'
+import ChatsPage from './pages/ChatsPage'
 import TripsPage from './pages/TripsPage'
+import TripDetailsPage from './pages/TripsDetailsPage'
 function App() {
   
 
@@ -43,9 +44,9 @@ function App() {
             <Route path='/post-trip' element={<PostTrip />} />
             <Route path='/trip-matches' element={<TripMatches />} />
              <Route path='/trips' element={<TripsPage />} />
-            {/* When we build Profile or Trips later, we will just add them right here! */}
+             <Route path='/view-details' element= {<TripDetailsPage />} />
+             <Route path='/chats' element={<ChatsPage />} />
         </Route>
-        <Route path='/dev-chat' element={<DevChat />} />
        
         
       </Routes>

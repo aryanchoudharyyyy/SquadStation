@@ -72,7 +72,7 @@ function PostTrip() {
           <div className="pt-divider"></div>
 
           {/* ── 2. Schedule & Info ── */}
-          <div className="pt-section">
+          <div className="pt-section pt-schedule-section">
             <h3 className="pt-section-title">Schedule & Info</h3>
             
             <div className="pt-grid-2">

@@ -5,10 +5,21 @@ function TripCard({ trip }) {
   if (!trip) return null;
 
   const isTrain = trip.mode === "TRAIN";
+  const dateObj = trip.travelDate ? new Date(trip.travelDate) : new Date(trip.travelDateTime);
+  const formattedDate = dateObj.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
-  const dateObj = new Date(trip.travelDateTime);
-  const formattedDate = dateObj.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
-  const formattedTime = dateObj.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+  const formattedTime = trip.travelTime || dateObj.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const title = trip.vehicleNumber
+    ? `Vehicle: ${trip.vehicleNumber}`
+    : trip.finalDestination || trip.destination || `${isTrain ? "Train" : "Bus"} Trip`;
 
   return (
     <div className="tc-card">
@@ -18,7 +29,7 @@ function TripCard({ trip }) {
         </div>
         
         <div className="tc-title">
-          {trip.vehicleNumber ? `Vehicle: ${trip.vehicleNumber}` : `${isTrain ? 'Train' : 'Bus'} Trip`}
+          {title}
         </div>
         
         <span className="tc-time">
@@ -26,7 +37,7 @@ function TripCard({ trip }) {
         </span>
         
         <div className="tc-price">
-          {trip.mode}
+          {trip.mode || (trip.finalDestination ? 'TRIP' : 'BUS')}
         </div>
       </div>
 

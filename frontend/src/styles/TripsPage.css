@@ -303,29 +303,6 @@
 }
 
 
-/* Dynamic left border colors */
-
-.trip-card.road-trip {
-  border-left-color: rgb(249, 115, 22);
-}
-
-.trip-card.adventure {
-  border-left-color: rgb(13, 148, 136);
-}
-
-.trip-card.beach {
-  border-left-color: rgb(14, 165, 233);
-}
-
-.trip-card.spiritual {
-  border-left-color: rgb(245, 158, 11);
-}
-
-.trip-card.backpacking {
-  border-left-color: rgb(244, 63, 94);
-}
-
-
 /* =========================================================
    TRIP MAIN
    Tailwind:
@@ -338,56 +315,6 @@
   padding: 20px;
 }
 
-
-/* =========================================================
-   TRIP TAG
-   Tailwind:
-   inline-block
-   text-xs font-medium
-   px-2 py-0.5
-   rounded-sm
-   ========================================================= */
-
-.trip-tag {
-  display: inline-block;
-
-  padding: 2px 8px;
-
-  border-radius: 2px;
-
-  font-size: 12px;
-  font-weight: 500;
-}
-
-
-/* =========================================================
-   TAG COLORS
-   ========================================================= */
-
-.trip-tag.road-trip {
-  background-color: rgb(255, 247, 237);
-  color: var(--orange-700);
-}
-
-.trip-tag.adventure {
-  background-color: rgb(240, 253, 250);
-  color: var(--accent-600);
-}
-
-.trip-tag.beach {
-  background-color: rgb(240, 249, 255);
-  color: rgb(3, 105, 161);
-}
-
-.trip-tag.spiritual {
-  background-color: rgb(255, 251, 235);
-  color: rgb(180, 83, 9);
-}
-
-.trip-tag.backpacking {
-  background-color: rgb(255, 241, 242);
-  color: rgb(190, 18, 60);
-}
 
 
 /* =========================================================

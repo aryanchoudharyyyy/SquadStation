@@ -9,7 +9,7 @@ function OtpVerification() {
   const [timer, setTimer] = useState(30);
   const inputRefs = useRef([]);
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setUser, email } = useAuth();
 
   useEffect(() => {
     if (timer > 0) {
@@ -44,6 +44,11 @@ function OtpVerification() {
 
   function handleVerify(e) {
     e.preventDefault();
+    // Derive a display name from the email (e.g., "aryan.sharma@college.edu" → "Aryan")
+    const nameFromEmail = email
+      ? email.split("@")[0].split(".")[0].replace(/^\w/, c => c.toUpperCase())
+      : "You";
+    setUser({ id: 1, name: nameFromEmail, email });
     setIsLoggedIn(true);
     navigate("/home");
   }

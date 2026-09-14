@@ -32,8 +32,11 @@
   margin-bottom: var(--space-8);
 }
 .pt-header h1 {
-  font-size: 24px;
-  font-weight: 700;
+  font-family: ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--text-primary);
   margin: 0 0 var(--space-2) 0;
 }
@@ -136,20 +139,25 @@
   font-weight: 400;
 }
 
-.pt-input-group { display: flex; flex-direction: column; flex: 1; }
-.pt-input-wrapper { position: relative; display: flex; align-items: center; }
-.pt-input-icon { position: absolute; left: 12px; color: var(--text-tertiary); pointer-events: none; }
+.pt-input-group { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.pt-input-wrapper { position: relative; display: flex; align-items: center; width: 100%; box-sizing: border-box; }
+.pt-input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); pointer-events: none; z-index: 2; }
 
 .pt-input {
   /* Inherits global .input but needs padding for icon */
   width: 100%;
   height: 36px;
-  padding: 0 var(--space-3) 0 36px;
+  padding: 0 var(--space-3) 0 40px !important;
   font-size: 14px;
   color: var(--text-primary);
   background-color: var(--surface-main);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
+  box-sizing: border-box;
+}
+.pt-input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
 }
 .pt-input:focus {
   outline: none;
@@ -163,6 +171,11 @@
   align-items: center;
   gap: var(--space-4);
 }
+
+.pt-schedule-section {
+  margin-top: var(--space-8);
+}
+
 .pt-route-arrow {
   margin-top: 24px;
   display: flex;
