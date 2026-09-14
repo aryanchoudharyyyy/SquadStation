@@ -46,9 +46,9 @@ function Marketplace(){
     return(
         <div className="marketplace-wrapper">
             <div className="marketplace-hero">
-                <h1>Find your next journey</h1>
-                <p>Buy, sell and discover train and bus tickets within your campus community.</p>
-                <div className="search-container">
+                <h1 className="animate-in" style={{ animationDelay: "0.05s" }}>Find your next journey</h1>
+                <p className="animate-in" style={{ animationDelay: "0.1s" }}>Buy, sell and discover train and bus tickets within your campus community.</p>
+                <div className="search-container animate-in" style={{ animationDelay: "0.15s" }}>
                     <Search className="search-icon" size={20} strokeWidth={2.5} />
                     <input
                         type="text"
@@ -60,7 +60,7 @@ function Marketplace(){
                 </div>
 
                 {/* --- PREMIUM FILTER BAR --- */}
-                <div className="filter-container-premium">
+                <div className="filter-container-premium animate-in" style={{ animationDelay: "0.2s" }}>
                     <div className="filter-tabs-group">
                         <button 
                             className={`filter-btn ${activeFilter === "All" ? "active-all" : ""}`}
@@ -91,7 +91,7 @@ function Marketplace(){
                             <ChevronDown size={16} />
                         </button>
                         <button 
-                            className="post-ticket-btn" 
+                            className="btn btn-primary" 
                             onClick={() => navigate("/marketplace/create")}
                         >
                             + Sell Ticket
@@ -108,11 +108,12 @@ function Marketplace(){
                         const matchesFilter = activeFilter === "All" ? true : item.listingType === activeFilter;
                         return matchesSearch && matchesFilter;
                     })
-                    .map((item) => (
+                    .map((item, index) => (
                         <div 
-                            className="premium-list-card" 
+                            className="premium-list-card animate-in" 
                             key={item.id} 
                             onClick={() => navigate("/marketplace/" + item.id)} 
+                            style={{ animationDelay: `${0.25 + (index * 0.1)}s` }}
                         >
                             {/* Top Header */}
                             <div className="list-card-header">

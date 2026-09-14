@@ -78,7 +78,7 @@ function ListingDetail() {
           </div>
 
           {/* ── Route Timeline ── */}
-          <div className="ld-route-card ld-animate" style={{ animationDelay: "0.1s" }}>
+          <div className="ld-route-card animate-in" style={{ animationDelay: "0.1s" }}>
             <h2 className="ld-section-label">Journey Route</h2>
             <div className="ld-route-timeline">
               <div className="ld-route-point">
@@ -106,7 +106,7 @@ function ListingDetail() {
           </div>
 
           {/* ── Meta Info Grid ── */}
-          <div className="ld-meta-grid ld-animate" style={{ animationDelay: "0.2s" }}>
+          <div className="ld-meta-grid animate-in" style={{ animationDelay: "0.2s" }}>
             <div className="ld-meta-card">
               <div className="ld-meta-icon-wrap">
                 <Calendar size={20} />
@@ -148,7 +148,7 @@ function ListingDetail() {
           </div>
 
           {/* ── Seller Info ── */}
-          <div className="ld-seller-card ld-animate" style={{ animationDelay: "0.3s" }}>
+          <div className="ld-seller-card animate-in" style={{ animationDelay: "0.3s" }}>
             <h2 className="ld-section-label">Listed By</h2>
             <div className="ld-seller-row">
               <div className="ld-seller-avatar">
@@ -164,7 +164,7 @@ function ListingDetail() {
 
         {/* ════════════════ RIGHT COLUMN ════════════════ */}
         <div className="ld-side-col">
-          <div className="ld-price-card ld-animate" style={{ animationDelay: "0.15s" }}>
+          <div className="ld-price-card animate-in" style={{ animationDelay: "0.15s" }}>
             <p className="ld-price-label">Asking Price</p>
             <h2 className="ld-price-value">₹{dummyListing.price}</h2>
             <p className="ld-price-sub">per ticket</p>
@@ -174,7 +174,7 @@ function ListingDetail() {
             {isOwner ? (
               <div className="ld-owner-actions">
                 <div className="ld-interest-box">
-                  <h3>🔥 {dummyListing.interestCount} Users Interested</h3>
+                  <h3>{dummyListing.interestCount} users interested</h3>
                   <p>Check your messages to finalize the deal.</p>
                 </div>
                 <button className="ld-btn-delete">

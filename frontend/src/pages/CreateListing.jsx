@@ -27,7 +27,7 @@ function CreateListing() {
   return (
     <div className="cl-page">
       {/* ── Breadcrumb ── */}
-      <nav className="cl-breadcrumb cl-animate">
+      <nav className="cl-breadcrumb animate-in">
         <span className="cl-breadcrumb-link" onClick={() => navigate("/marketplace")}>
           Marketplace
         </span>
@@ -36,13 +36,13 @@ function CreateListing() {
       </nav>
 
       {/* ── Page Header ── */}
-      <div className="cl-header cl-animate">
+      <div className="cl-header animate-in">
         <h1>Sell a Ticket</h1>
         <p>List your train or bus ticket in the campus marketplace.</p>
       </div>
 
       {/* ── Step Progress Bar ── */}
-      <div className="cl-steps cl-animate" style={{ animationDelay: "0.05s" }}>
+      <div className="cl-steps animate-in" style={{ animationDelay: "0.05s" }}>
         <div className="cl-step cl-step-active">
           <div className="cl-step-dot">1</div>
           <span>Transport</span>
@@ -60,7 +60,7 @@ function CreateListing() {
       </div>
 
       {/* ── Form Card ── */}
-      <div className="cl-form-card cl-animate" style={{ animationDelay: "0.1s" }}>
+      <div className="cl-form-card animate-in" style={{ animationDelay: "0.1s" }}>
         <form onSubmit={handleSubmit}>
 
           {/* ── Section 1: Ticket Type ── */}
