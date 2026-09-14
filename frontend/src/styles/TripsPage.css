@@ -1,0 +1,1056 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.trips-page {
+  min-height: 100vh;
+  background-color: var(--stone-100);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   Tailwind:
+   mx-auto max-w-4xl px-6 py-12
+   ========================================================= */
+
+.trips-container {
+  width: 100%;
+  max-width: 896px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 24px;
+  padding-right: 24px;
+
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+
+/* =========================================================
+   HEADER
+   Tailwind:
+   flex items-end justify-between gap-4
+   pb-8 border-b border-stone-300
+   ========================================================= */
+
+.trips-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding-bottom: 32px;
+
+  border-bottom: 1px solid var(--stone-300);
+}
+
+
+/* =========================================================
+   HEADER CONTENT
+   ========================================================= */
+
+.header-content {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   HEADER LABEL
+   Tailwind:
+   flex items-center gap-2
+   text-teal-700 text-sm font-medium
+   ========================================================= */
+
+.header-label {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0;
+
+  color: var(--accent-600);
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   HEADER TITLE
+   Tailwind:
+   mt-1 font-serif text-4xl text-stone-900
+   ========================================================= */
+
+.header-title {
+  margin: 4px 0 0;
+
+  color: var(--stone-900);
+
+  font-family: ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+
+  font-size: 36px;
+  line-height: 1;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   HEADER DESCRIPTION
+   Tailwind:
+   mt-2 text-stone-600 max-w-md
+   ========================================================= */
+
+.header-description {
+  max-width: 448px;
+
+  margin: 8px 0 0;
+
+  color: var(--stone-600);
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   POST TRIP BUTTON
+   Tailwind:
+   flex items-center gap-2
+   rounded-md bg-orange-600
+   px-4 py-2.5
+   text-white font-medium
+   hover:bg-orange-700
+   transition-colors shrink-0
+   ========================================================= */
+
+.post-trip-btn {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  padding: 10px 16px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background-color: var(--orange-600);
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    text-decoration-color,
+    fill,
+    stroke;
+
+  transition-duration: 150ms;
+}
+
+.post-trip-btn:hover {
+  background-color: var(--orange-700);
+}
+
+
+/* =========================================================
+   SORT ROW
+   Tailwind:
+   flex flex-wrap items-center
+   gap-x-6 gap-y-2
+   py-5 text-sm
+   ========================================================= */
+
+.sort-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  column-gap: 24px;
+  row-gap: 8px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   SORT LABEL
+   ========================================================= */
+
+.sort-label {
+  color: var(--stone-500);
+}
+
+
+/* =========================================================
+   SORT BUTTON
+   Tailwind:
+   pb-0.5 border-b-2 transition-colors
+   ========================================================= */
+
+.sort-btn {
+  padding: 0 0 2px;
+
+  border: 0;
+  border-bottom: 2px solid transparent;
+
+  background: transparent;
+
+  color: var(--stone-500);
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    text-decoration-color,
+    fill,
+    stroke;
+
+  transition-duration: 150ms;
+}
+
+
+/* Original:
+   hover:text-stone-800
+*/
+
+.sort-btn:hover {
+  color: var(--stone-800);
+}
+
+
+/* Original active:
+   border-orange-600
+   text-stone-900
+   font-medium
+*/
+
+.sort-btn.active {
+  border-bottom-color: var(--orange-600);
+
+  color: var(--stone-900);
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   TRIP LIST
+   Tailwind:
+   flex flex-col gap-4 pb-16
+   ========================================================= */
+
+.trip-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  padding-bottom: 64px;
+}
+
+
+/* =========================================================
+   TRIP CARD
+   Tailwind:
+   flex flex-col sm:flex-row
+   bg-white
+   border border-stone-200
+   border-l-4
+   rounded-sm
+   overflow-hidden
+   ========================================================= */
+
+.trip-card {
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+
+  border: 1px solid var(--stone-200);
+
+  border-left-width: 4px;
+
+  border-radius: 2px;
+
+  overflow: hidden;
+}
+
+
+/* Dynamic left border colors */
+
+.trip-card.road-trip {
+  border-left-color: rgb(249, 115, 22);
+}
+
+.trip-card.adventure {
+  border-left-color: rgb(13, 148, 136);
+}
+
+.trip-card.beach {
+  border-left-color: rgb(14, 165, 233);
+}
+
+.trip-card.spiritual {
+  border-left-color: rgb(245, 158, 11);
+}
+
+.trip-card.backpacking {
+  border-left-color: rgb(244, 63, 94);
+}
+
+
+/* =========================================================
+   TRIP MAIN
+   Tailwind:
+   flex-1 p-5
+   ========================================================= */
+
+.trip-main {
+  flex: 1;
+
+  padding: 20px;
+}
+
+
+/* =========================================================
+   TRIP TAG
+   Tailwind:
+   inline-block
+   text-xs font-medium
+   px-2 py-0.5
+   rounded-sm
+   ========================================================= */
+
+.trip-tag {
+  display: inline-block;
+
+  padding: 2px 8px;
+
+  border-radius: 2px;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   TAG COLORS
+   ========================================================= */
+
+.trip-tag.road-trip {
+  background-color: rgb(255, 247, 237);
+  color: var(--orange-700);
+}
+
+.trip-tag.adventure {
+  background-color: rgb(240, 253, 250);
+  color: var(--accent-600);
+}
+
+.trip-tag.beach {
+  background-color: rgb(240, 249, 255);
+  color: rgb(3, 105, 161);
+}
+
+.trip-tag.spiritual {
+  background-color: rgb(255, 251, 235);
+  color: rgb(180, 83, 9);
+}
+
+.trip-tag.backpacking {
+  background-color: rgb(255, 241, 242);
+  color: rgb(190, 18, 60);
+}
+
+
+/* =========================================================
+   TRIP TITLE
+   Tailwind:
+   mt-2 font-serif text-2xl text-stone-900
+   flex items-center gap-2 flex-wrap
+   ========================================================= */
+
+.trip-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 8px 0 0;
+
+  color: var(--stone-900);
+
+  font-family: ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+
+  font-size: 24px;
+  line-height: 1.5;
+
+  font-weight: 400;
+}
+
+
+/* Original:
+   ArrowRight className="text-stone-400"
+*/
+
+.trip-arrow {
+  color: var(--stone-400);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   Tailwind:
+   mt-1 text-stone-600 text-sm
+   ========================================================= */
+
+.trip-description {
+  margin: 4px 0 0;
+
+  color: var(--stone-600);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   META
+   Tailwind:
+   mt-3
+   flex flex-wrap items-center
+   gap-x-5 gap-y-1
+   text-sm text-stone-500
+   ========================================================= */
+
+.trip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  column-gap: 20px;
+  row-gap: 4px;
+
+  margin-top: 12px;
+
+  color: var(--stone-500);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   META ITEM
+   Tailwind:
+   flex items-center gap-1.5
+   ========================================================= */
+
+.trip-meta-item {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+/* =========================================================
+   PERFORATION
+   Tailwind:
+   relative hidden sm:block
+   w-px
+   bg-transparent
+   border-l-2 border-dashed border-stone-300
+   my-4
+   ========================================================= */
+
+.trip-perforation {
+  position: relative;
+
+  display: none;
+
+  width: 1px;
+
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  background-color: transparent;
+
+  border-left: 2px dashed var(--stone-300);
+}
+
+
+/* =========================================================
+   PERFORATION CIRCLES
+   Tailwind:
+   absolute
+   -top-3 -left-3
+   w-6 h-6
+   rounded-full
+   bg-stone-100
+   border border-stone-200
+   ========================================================= */
+
+.perforation-circle {
+  position: absolute;
+
+  left: -12px;
+
+  width: 24px;
+  height: 24px;
+
+  border: 1px solid var(--stone-200);
+
+  border-radius: 9999px;
+
+  background-color: var(--stone-100);
+}
+
+.perforation-circle.top {
+  top: -12px;
+}
+
+.perforation-circle.bottom {
+  bottom: -12px;
+}
+
+
+/* =========================================================
+   PRICE / ACTION
+   Tailwind:
+   flex
+   sm:flex-col
+   items-center
+   sm:items-end
+   justify-between
+   sm:justify-center
+   gap-2
+   p-5
+   sm:w-44
+   bg-stone-50
+   sm:bg-transparent
+   ========================================================= */
+
+.trip-action {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding: 20px;
+
+  width: 100%;
+
+  background-color: var(--stone-50);
+}
+
+
+/* =========================================================
+   PRICE
+   Tailwind:
+   flex items-center
+   text-lg font-serif text-stone-900
+   ========================================================= */
+
+.trip-price {
+  display: flex;
+  align-items: center;
+
+  color: var(--stone-900);
+
+  font-family: ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+
+  font-size: 18px;
+  line-height: 1.75;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   VIEW TRIP BUTTON
+   Tailwind:
+   text-sm font-medium
+   px-4 py-2
+   rounded-md
+   transition-colors
+   ========================================================= */
+
+.view-trip-btn {
+  padding: 8px 16px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background-color: var(--accent-600);
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    text-decoration-color,
+    fill,
+    stroke;
+
+  transition-duration: 150ms;
+}
+
+.view-trip-btn:hover {
+  background-color: var(--accent-700);
+}
+
+
+/* =========================================================
+   FULL BUTTON
+   Tailwind:
+   bg-stone-200
+   text-stone-400
+   cursor-not-allowed
+   ========================================================= */
+
+.view-trip-btn.full {
+  background-color: var(--stone-200);
+
+  color: var(--stone-400);
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   Tailwind:
+   text-center py-16 text-stone-500
+   ========================================================= */
+
+.empty-state {
+  padding-top: 64px;
+  padding-bottom: 64px;
+
+  color: var(--stone-500);
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   FORM OVERLAY
+   Tailwind:
+   fixed inset-0 z-50
+   flex justify-end
+   ========================================================= */
+
+.form-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 50;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+/* =========================================================
+   BACKDROP
+   Tailwind:
+   absolute inset-0 bg-stone-900/40
+   ========================================================= */
+
+.form-backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background-color: rgba(28, 25, 23, 0.4);
+}
+
+
+/* =========================================================
+   FORM PANEL
+   Tailwind:
+   relative
+   w-full
+   max-w-md
+   h-full
+   bg-white
+   shadow-xl
+   overflow-y-auto
+   ========================================================= */
+
+.form-panel {
+  position: relative;
+
+  width: 100%;
+  max-width: 448px;
+
+  height: 100%;
+
+  background-color: white;
+
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   FORM HEADER
+   Tailwind:
+   flex items-center justify-between
+   px-6 py-5
+   border-b border-stone-200
+   ========================================================= */
+
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-left: 24px;
+  padding-right: 24px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--stone-200);
+}
+
+
+/* =========================================================
+   FORM TITLE
+   Tailwind:
+   font-serif text-xl text-stone-900
+   ========================================================= */
+
+.form-title {
+  margin: 0;
+
+  color: var(--stone-900);
+
+  font-family: ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+
+  font-size: 20px;
+  line-height: 1.4;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   Tailwind:
+   text-stone-400
+   hover:text-stone-700
+   ========================================================= */
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--stone-400);
+
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: var(--stone-700);
+}
+
+
+/* =========================================================
+   FORM
+   Tailwind:
+   px-6 py-6
+   flex flex-col gap-5
+   ========================================================= */
+
+.trip-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+
+  padding: 24px;
+}
+
+
+/* =========================================================
+   FORM GRID
+   Tailwind:
+   grid grid-cols-2 gap-4
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+/* =========================================================
+   FIELD
+   Tailwind:
+   flex flex-col gap-1.5
+   ========================================================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+
+/* =========================================================
+   FIELD LABEL
+   Tailwind:
+   text-xs font-medium text-stone-500
+   ========================================================= */
+
+.field-label {
+  color: var(--stone-500);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   INPUT
+   Original CSS from your code
+   ========================================================= */
+
+.input {
+  width: 100%;
+
+  border: 1px solid var(--stone-300);
+
+  border-radius: 0.375rem;
+
+  padding: 0.55rem 0.75rem;
+
+  font-size: 0.9rem;
+
+  color: var(--stone-900);
+
+  background: white;
+}
+
+.input:focus {
+  outline: 2px solid var(--orange-700);
+
+  outline-offset: 1px;
+
+  border-color: transparent;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   Tailwind:
+   resize-none
+   ========================================================= */
+
+.resize-none {
+  resize: none;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   Tailwind:
+   mt-2
+   flex items-center justify-center gap-2
+   rounded-md
+   bg-orange-600
+   px-4 py-3
+   text-white font-medium
+   hover:bg-orange-700
+   transition-colors
+   ========================================================= */
+
+.submit-trip-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 8px;
+
+  padding: 12px 16px;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background-color: var(--orange-600);
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    text-decoration-color,
+    fill,
+    stroke;
+
+  transition-duration: 150ms;
+}
+
+.submit-trip-btn:hover {
+  background-color: var(--orange-700);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   Tailwind sm: = 640px
+   ========================================================= */
+
+@media (min-width: 640px) {
+
+  /* sm:flex-row */
+  .trip-card {
+    flex-direction: row;
+  }
+
+  /* sm:block */
+  .trip-perforation {
+    display: block;
+  }
+
+  /* sm:flex-col */
+  .trip-action {
+    flex-direction: column;
+  }
+
+  /* sm:items-end */
+  .trip-action {
+    align-items: flex-end;
+  }
+
+  /* sm:justify-center */
+  .trip-action {
+    justify-content: center;
+  }
+
+  /* sm:w-44 */
+  .trip-action {
+    width: 176px;
+  }
+
+  /* sm:bg-transparent */
+  .trip-action {
+    background-color: transparent;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .trips-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .trips-header {
+    align-items: flex-start;
+  }
+
+  .post-trip-btn {
+    width: auto;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .trips-container {
+    padding-left: 16px;
+    padding-right: 16px;
+
+    padding-top: 32px;
+  }
+
+  .header-title {
+    font-size: 30px;
+  }
+
+  .post-trip-btn {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

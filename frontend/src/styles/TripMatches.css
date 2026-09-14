@@ -1,0 +1,190 @@
+/* src/styles/TripMatches.css */
+.tm-page {
+  padding: var(--space-8) var(--space-6);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tm-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+
+.tm-header-info h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.tm-header-info p {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.tm-btn-create-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--accent-600);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px var(--space-4);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.tm-btn-create-group:hover {
+  background: var(--accent-700);
+}
+
+.tm-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.tm-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.tm-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-hover);
+}
+
+.tm-user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.tm-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--slate-100);
+  color: var(--accent-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tm-details h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.tm-time {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.tm-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  position: relative;
+}
+
+.tm-btn-chat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--accent-50);
+  color: var(--accent-600);
+  border: 1px solid var(--accent-100);
+  border-radius: var(--radius-sm);
+  padding: 6px var(--space-3);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.tm-btn-chat:hover {
+  background: var(--accent-100);
+}
+
+.tm-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--space-2);
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-popover);
+  padding: var(--space-1);
+  min-width: 160px;
+  z-index: 10;
+}
+
+.tm-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.tm-dropdown-item:hover {
+  background: var(--surface-hover);
+}
+
+.tm-dropdown-item.personal {
+  color: var(--accent-600);
+}
+
+.tm-dropdown-item.group {
+  color: var(--status-success);
+}
+
+@media (max-width: 640px) {
+  .tm-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+  
+  .tm-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+  
+  .tm-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .tm-btn-chat {
+    flex: 1;
+    justify-content: center;
+  }
+}
