@@ -1,7 +1,7 @@
 # React Learning Tracker
 
 ## 🎯 Goal
-Learn React from scratch by building SquadStation. Focus on project-based, practical knowledge rather than abstract examples.
+Learn React from scratch by building College Travel. Focus on project-based, practical knowledge rather than abstract examples.
 
 ## 📚 Concepts Roadmap
 ### 1. The Basics

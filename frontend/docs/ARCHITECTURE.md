@@ -1,4 +1,4 @@
-# SquadStation Frontend Architecture
+# College Travel Frontend Architecture
 
 ## 1. Tech Stack
 * **Framework:** React 19 (via Vite)

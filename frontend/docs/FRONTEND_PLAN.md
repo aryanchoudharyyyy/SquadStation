@@ -1,4 +1,4 @@
-# SquadStation Frontend Plan
+# College Travel Frontend Plan
 
 This plan is synthesized from the **Original Frontend Build Guide** and the **Updated Frontend Build Guide (Revision 2)**. The Updated Guide serves as the primary source of truth for production-grade flows (auth, pagination, websockets) overriding the optimistic paths in the original.
 

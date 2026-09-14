@@ -17,6 +17,10 @@ import Footer from './components/Footer'
 import CreateListing from './pages/CreateListing'
 import Profile from './pages/Profile'
 import MyListings from './pages/MyListings'
+import PostTrip from './pages/PostTrip'
+import TripMatches from './pages/TripMatches'
+import DevChat from './components/DevChat'
+import TripsPage from './pages/TripsPage'
 function App() {
   
 
@@ -36,8 +40,13 @@ function App() {
             <Route path='marketplace/:id' element={<ListingDetail />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/my-listings' element={<MyListings />} />
+            <Route path='/post-trip' element={<PostTrip />} />
+            <Route path='/trip-matches' element={<TripMatches />} />
+             <Route path='/trips' element={<TripsPage />} />
             {/* When we build Profile or Trips later, we will just add them right here! */}
         </Route>
+        <Route path='/dev-chat' element={<DevChat />} />
+       
         
       </Routes>
 
