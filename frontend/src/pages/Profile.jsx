@@ -12,7 +12,7 @@ function Profile(){
     return (
         <div className="pr-page">
              {/* ── Profile Header ── */}
-             <div className="pr-header-card pr-animate">
+             <div className="pr-header-card animate-in">
                 <div className="pr-avatar-large">
                     <User size={48} />
                 </div>
@@ -29,7 +29,7 @@ function Profile(){
              </div>
              
              {/* Note: Tabs and listings were moved to MyListings.jsx */}
-             <div className="pr-animate" style={{animationDelay: '0.1s', marginTop: '32px'}}>
+             <div className="animate-in" style={{animationDelay: '0.1s', marginTop: '32px'}}>
                 <h2 style={{fontSize: '20px', marginBottom: '16px'}}>Account Settings</h2>
                 <div className="pr-header-card" style={{flexDirection: 'column', alignItems: 'flex-start', padding: '24px'}}>
                     <p style={{color: '#64748b'}}>You can manage your account settings, password, and preferences here.</p>

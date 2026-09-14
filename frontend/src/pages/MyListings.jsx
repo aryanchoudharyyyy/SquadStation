@@ -39,8 +39,8 @@ function MyListings() {
 
     return (
         <div className="pr-page">
-             <h1 style={{ fontSize: "28px", fontWeight: "800", marginBottom: "24px", color: "var(--color-text-main)" }}>My Dashboard</h1>
-             <div className="pr-tabs pr-animate">
+             <h1 style={{ marginBottom: "var(--space-6)" }}>My Dashboard</h1>
+             <div className="pr-tabs animate-in">
                 <button className={`pr-tab ${activeTab==="listings"? 'active' : ''}`}
                 onClick={()=> setActiveTab('listings')}>
                     My Listings ({myListings.length})
@@ -55,7 +55,7 @@ function MyListings() {
                 </button>
              </div>
              
-             <div className="pr-content pr-animate" style={{animationDelay: '0.1s'}}>
+             <div className="pr-content animate-in" style={{animationDelay: '0.1s'}}>
                 {activeTab === 'listings' && (
                     <div className="pr-listings-grid">
                         {myListings.length===0 ? (
@@ -105,7 +105,7 @@ function MyListings() {
                 )}
                 
                 {activeTab === 'trips' && (
-                    <div className="pr-listings-grid">
+                    <div className="pr-listings-grid" style={{ marginTop: '24px' }}>
                         {myTrips.length === 0 ? (
                             <div className="pr-empty-state">
                                 <p>You haven't posted any trips yet.</p>
