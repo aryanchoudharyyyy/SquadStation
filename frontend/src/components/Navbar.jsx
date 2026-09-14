@@ -51,7 +51,7 @@ function Navbar(){
                     <User size={16} />
                 </div>
                 Aryan 
-                <ChevronDown size={14} style={{marginLeft:"4px", color: "var(--color-text-muted)"}} />
+                <ChevronDown size={14} style={{marginLeft:"4px", color: "var(--text-tertiary)"}} />
             </button>
             {isDropdownOpen && (
                 <div className="profile-menu">
