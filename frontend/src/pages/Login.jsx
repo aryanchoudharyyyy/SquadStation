@@ -1,32 +1,92 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { Mail, ArrowRight, Compass } from "lucide-react";
+import "../styles/Auth.css";
 
-function Login(){
-    const [email, setEmail] = useState("");
-    const [error, setError] = useState("");
-     const navigate = useNavigate();
-   
+function Login() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-    function handleSubmit(){
-        if(email.includes('@')){
-            setError("");
-            
-            navigate("/otpVerification");
-        console.log("Submitting email: " +email)
-        }
-        else{
-            setError("Please enter a valid email!");
-        }
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (email.includes("@")) {
+      setError("");
+      console.log("Submitting email: " + email);
+      navigate("/otpVerification");
+    } else {
+      setError("Please enter a valid college email address!");
     }
+  }
 
-    return <div className="auth-container">
+  return (
+    <div className="auth-wrapper">
+      {/* Left — Image Panel (slides in from left) */}
+      <div className="auth-image-panel">
+        <img src="/auth-hero.jpg" alt="Students on campus" />
+        <div className="auth-image-overlay">
+          <h2>Welcome to<br />College Travel</h2>
+          <p>Your campus community, connected. Collaborate. Share. Grow together.</p>
+        </div>
+      </div>
+
+      {/* Right — Form Panel (slides in from right) */}
+      <div className="auth-form-panel">
+
+
         <div className="auth-card">
-    <h1>Login</h1>
-    {error!="" && (<p style={{color:"red"}}>{error}</p>)}
-    <input type="email" placeholder="College email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-    <button onClick={handleSubmit}>Submit</button>
+          {/* Brand */}
+          <div className="auth-brand">
+            <div className="auth-brand-icon">
+              <Compass size={26} />
+            </div>
+            <span className="auth-brand-name">College Travel</span>
+          </div>
+
+          {/* Header */}
+          <div className="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in with your college email to continue</p>
+          </div>
+
+          {/* Error */}
+          {error && <div className="auth-error">{error}</div>}
+
+          {/* Form */}
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="auth-input-group">
+              <label className="auth-label">College Email</label>
+              <div className="auth-input-wrapper">
+                <Mail size={18} className="auth-icon" />
+                <input
+                  type="email"
+                  className="auth-input"
+                  placeholder="e.g., aman.sharma@college.edu"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="btn btn-primary auth-btn-submit">
+              Sign in to account
+            </button>
+          </form>
+
+          {/* Footer */}
+          <div className="auth-footer">
+            <span>
+              Don't have an account?{" "}
+              <button className="auth-link" onClick={() => navigate("/signup")}>
+                Sign up
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+  );
 }
+
 export default Login;
