@@ -1,121 +1,146 @@
-/* src/styles/TripCard.css */
+/* ====================================================
+   TRIP CARD (Vertical Match)
+   ==================================================== */
 
-.trip-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 20px;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+.tc-card {
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-.trip-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  transform: translateY(-2px);
+  transition: all var(--duration-fast) var(--ease-standard);
+  overflow: hidden;
 }
 
-/* Header */
+.tc-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-hover);
+}
+
 .tc-header {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4) var(--space-4) 0;
+  margin-bottom: var(--space-4);
 }
-.tc-mode-badge {
-  display: inline-flex;
+
+.tc-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 13px;
+  justify-content: center;
+  margin-bottom: var(--space-3);
+}
+
+.tc-bg-train { background-color: var(--accent-50); color: var(--accent-600); }
+.tc-bg-bus { background-color: #f0fdf4; color: var(--status-success); }
+
+.tc-title {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 16px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.tc-bg-train { background: #eff6ff; color: #2563eb; }
-.tc-bg-bus { background: #f0fdf4; color: #16a34a; }
-
-.tc-vehicle-number {
-  font-size: 14px;
-  font-weight: 600;
-  color: #64748b;
+  color: var(--text-primary);
+  margin-bottom: 2px;
 }
 
-/* Route Section */
+.tc-time {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tc-price {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent-600);
+  margin-top: var(--space-2);
+}
+
 .tc-route-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f8fafc;
-  padding: 16px;
-  border-radius: 12px;
+  background: var(--surface-subtle);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: 0;
 }
-.tc-route-point {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  flex: 1;
-}
-.tc-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-top: 4px;
-  flex-shrink: 0;
-}
-.tc-dot-source { background: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-.tc-dot-boarding { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
 
-.tc-point-info { display: flex; flex-direction: column; }
-.tc-label { font-size: 12px; font-weight: 600; color: #94a3b8; margin-bottom: 2px; }
-.tc-station { font-size: 16px; font-weight: 800; color: #0f172a; margin: 0; }
-
-.tc-route-divider {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  max-width: 60px;
-  margin: 0 16px;
-}
-.tc-dashed-line {
-  flex: 1;
-  height: 2px;
-  background: repeating-linear-gradient(to right, #cbd5e1 0, #cbd5e1 4px, transparent 4px, transparent 8px);
-}
-.tc-arrow { color: #94a3b8; margin: 0 4px; flex-shrink: 0; }
-
-/* Date & Time */
-.tc-datetime-section {
-  display: flex;
-  gap: 12px;
-}
-.tc-time-capsule {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  padding: 8px 14px;
-  border-radius: 100px;
+.tc-route-city {
   font-size: 13px;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-primary);
 }
-.tc-time-capsule svg { color: #94a3b8; }
 
-/* Footer */
+.tc-arrow {
+  color: var(--text-tertiary);
+}
+
+.tc-date-box {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  color: var(--text-secondary);
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+}
+
 .tc-footer {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-main);
+  margin-top: auto;
+}
+
+.tc-badge {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding-top: 16px;
-  border-top: 1px dashed #e2e8f0;
+  gap: var(--space-1);
+  padding: 4px 8px;
+  color: var(--text-tertiary);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
 }
-.tc-pin-icon { color: #ef4444; }
-.tc-footer-text {
-  font-size: 13px;
-  color: #64748b;
+
+.tc-badge.has-interest {
+  color: #c2410c;
+  background: #fff7ed;
 }
-.tc-footer-text strong { color: #334155; }
+
+.tc-action-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tc-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+.tc-icon-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}

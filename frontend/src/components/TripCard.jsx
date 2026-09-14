@@ -1,5 +1,5 @@
-import { TrainFront, BusFront, Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
-import "../styles/TripCard.css";
+import { TrainFront, BusFront, Clock, MoveRight, Flame, Edit, Trash2 } from "lucide-react";
+import "../styles/TripCard.css"; 
 
 function TripCard({ trip }) {
   if (!trip) return null;
@@ -11,63 +11,42 @@ function TripCard({ trip }) {
   const formattedTime = dateObj.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
 
   return (
-    <div className="trip-card">
+    <div className="tc-card">
       <div className="tc-header">
-        <div className={`tc-mode-badge ${isTrain ? "tc-bg-train" : "tc-bg-bus"}`}>
-          {isTrain ? <TrainFront size={16} /> : <BusFront size={16} />}
-          <span>{isTrain ? "Train" : "Bus"}</span>
+        <div className={`tc-icon-box ${isTrain ? 'tc-bg-train' : 'tc-bg-bus'}`}>
+          {isTrain ? <TrainFront size={20} /> : <BusFront size={20} />}
         </div>
         
-        {trip.vehicleNumber && (
-          <span className="tc-vehicle-number">
-            • {trip.vehicleNumber}
-          </span>
-        )}
+        <div className="tc-title">
+          {trip.vehicleNumber ? `Vehicle: ${trip.vehicleNumber}` : `${isTrain ? 'Train' : 'Bus'} Trip`}
+        </div>
+        
+        <span className="tc-time">
+          <Clock size={14} /> {formattedTime}
+        </span>
+        
+        <div className="tc-price">
+          {trip.mode}
+        </div>
       </div>
 
       <div className="tc-route-section">
-        <div className="tc-route-point">
-          <div className="tc-dot tc-dot-source"></div>
-          <div className="tc-point-info">
-            <span className="tc-label">Source Point</span>
-            <h3 className="tc-station">{trip.sourcePoint}</h3>
-          </div>
-        </div>
-
-        <div className="tc-route-divider">
-          <div className="tc-dashed-line"></div>
-          <ArrowRight size={18} className="tc-arrow" />
-          <div className="tc-dashed-line"></div>
-        </div>
-
-        <div className="tc-route-point">
-          <div className="tc-dot tc-dot-boarding"></div>
-          <div className="tc-point-info">
-            <span className="tc-label">Boarding Station</span>
-            <h3 className="tc-station">{trip.boardingStation}</h3>
-          </div>
-        </div>
+        <span className="tc-route-city">{trip.sourcePoint}</span>
+        <MoveRight size={14} className="tc-arrow" />
+        <span className="tc-route-city">{trip.boardingStation}</span>
+        <div className="tc-date-box">{formattedDate}</div>
       </div>
 
-      <div className="tc-datetime-section">
-        <div className="tc-time-capsule">
-          <Calendar size={15} />
-          <span>{formattedDate}</span>
+      <div className="tc-footer">
+        <div className="tc-badge has-interest">
+          <Flame size={14} /> 3 Interested
         </div>
-        <div className="tc-time-capsule">
-          <Clock size={15} />
-          <span>{formattedTime}</span>
+        
+        <div className="tc-action-column">
+          <button className="tc-icon-btn"><Edit size={14} /></button>
+          <button className="tc-icon-btn"><Trash2 size={14} /></button>
         </div>
       </div>
-
-      {trip.destination && (
-        <div className="tc-footer">
-          <MapPin size={14} className="tc-pin-icon" />
-          <span className="tc-footer-text">
-            Traveling to: <strong>{trip.destination}</strong>
-          </span>
-        </div>
-      )}
     </div>
   );
 }
