@@ -13,6 +13,7 @@ import {
   Share2,
   Package,
   User,
+  MessageCircle,
 } from "lucide-react";
 import "../styles/ListingDetail.css";
 
@@ -185,6 +186,13 @@ function ListingDetail() {
             ) : (
               <div className="ld-buyer-actions">
                 <button className="ld-btn-primary">Express Interest</button>
+                <button 
+                  className="ld-btn-secondary" 
+                  onClick={() => navigate(`/marketplace/chats?new_listing=${dummyListing.id}&seller=${dummyListing.postedByUserId}`)}
+                >
+                  <MessageCircle size={18} />
+                  Chat with Seller
+                </button>
                 <p className="ld-safety-tip">
                   <ShieldAlert size={14} />
                   Only pay after verifying the ticket in person.
