@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, LayoutGrid, TrainFront, BusFront, ArrowDownUp, ChevronDown, MoveRight, Clock } from "lucide-react";
 import "../styles/Marketplace.css";
@@ -42,6 +42,22 @@ function Marketplace(){
     const[searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();
     const[activeFilter, setActiveFilter] = useState("All");
+    const [sortOrder, setSortOrder] = useState("newest");
+    const [showSortOptions, setShowSortOptions] = useState(false);
+    const dropdownRef = useRef(null);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowSortOptions(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     
     return(
         <div className="marketplace-wrapper">
@@ -85,11 +101,43 @@ function Marketplace(){
                     <div className="filter-divider"></div>
                     
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                        <button className="sort-btn">
-                            <ArrowDownUp size={16} className="sort-icon" />
-                            Newest First
-                            <ChevronDown size={16} />
-                        </button>
+      <div className="sort-dropdown" ref={dropdownRef}>
+    <button
+        className={`sort-btn ${showSortOptions ? 'is-open' : ''}`}
+        onClick={() => setShowSortOptions(!showSortOptions)}
+    >
+        <div className="sort-btn-left">
+            <ArrowDownUp size={16} className="sort-icon" />
+            <span className="sort-label">
+                {sortOrder === "newest" ? "Newest First" : "Oldest First"}
+            </span>
+        </div>
+        <ChevronDown size={16} className={`sort-chevron ${showSortOptions ? 'rotate' : ''}`} />
+    </button>
+
+    {showSortOptions && (
+        <div className="sort-options">
+            <button
+                className={`sort-option-btn ${sortOrder === 'newest' ? 'selected' : ''}`}
+                onClick={() => {
+                    setSortOrder("newest");
+                    setShowSortOptions(false);
+                }}
+            >
+                Newest First
+            </button>
+            <button
+                className={`sort-option-btn ${sortOrder === 'oldest' ? 'selected' : ''}`}
+                onClick={() => {
+                    setSortOrder("oldest");
+                    setShowSortOptions(false);
+                }}
+            >
+                Oldest First
+            </button>
+        </div>
+    )}
+</div>
                         <button 
                             className="btn btn-primary" 
                             onClick={() => navigate("/marketplace/create")}
@@ -101,13 +149,26 @@ function Marketplace(){
             </div>
 
             <div className="list-card-container" style={{marginTop: "40px"}}>
-                {mockListings
-                    .filter((item) => {
-                        const searchStr = `${item.source} ${item.destination} ${item.description}`.toLowerCase();
-                        const matchesSearch = searchStr.includes(searchQuery.toLowerCase());
-                        const matchesFilter = activeFilter === "All" ? true : item.listingType === activeFilter;
-                        return matchesSearch && matchesFilter;
-                    })
+                {mockListings .filter((item) => {
+        const searchStr = `${item.source} ${item.destination} ${item.description}`.toLowerCase();
+
+        const matchesSearch = searchStr.includes(searchQuery.toLowerCase());
+
+        const matchesFilter =
+            activeFilter === "All"
+                ? true
+                : item.listingType === activeFilter;
+
+        return matchesSearch && matchesFilter;
+    })
+    .sort((a, b) => {
+        const timeA = parseInt(a.postedAt);
+        const timeB = parseInt(b.postedAt);
+
+        return sortOrder === "newest"
+            ? timeA - timeB
+            : timeB - timeA;
+    })
                     .map((item, index) => (
                         <div 
                             className="premium-list-card animate-in" 
