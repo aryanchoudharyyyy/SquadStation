@@ -22,11 +22,13 @@ import TripMatches from './pages/TripMatches'
 import ChatsPage from './pages/ChatsPage'
 import TripsPage from './pages/TripsPage'
 import TripDetailsPage from './pages/TripsDetailsPage'
+import ScrollToTop from './components/ScrollToTop'
 function App() {
   
 
   return (
     <>
+    <ScrollToTop />
      <Routes>
         {/* === UNPROTECTED ROUTES (Anyone can access) === */}
         <Route path='/' element={<Splash />}/>
