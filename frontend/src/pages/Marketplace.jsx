@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, LayoutGrid, TrainFront, BusFront, ArrowDownUp, ChevronDown, MoveRight, Clock } from "lucide-react";
+import { Search, LayoutGrid, TrainFront, BusFront, ArrowDownUp, ChevronDown, MoveRight, Clock, ArrowRight, Calendar } from "lucide-react";
 import "../styles/Marketplace.css";
 
 const mockListings = [
@@ -171,60 +171,51 @@ function Marketplace(){
     })
                     .map((item, index) => (
                         <div 
-                            className="premium-list-card animate-in" 
+                            className="trip-card animate-in" 
                             key={item.id} 
                             onClick={() => navigate("/marketplace/" + item.id)} 
-                            style={{ animationDelay: `${0.25 + (index * 0.1)}s` }}
+                            style={{ animationDelay: `${0.25 + (index * 0.1)}s`, cursor: 'pointer' }}
                         >
-                            {/* Top Header */}
-                            <div className="list-card-header">
-                                <div className="list-card-title-section">
-                                    <div className="list-icon-wrapper">
-                                        {item.listingType === 'TRAIN' ? (
-                                            <TrainFront size={20} className="icon-train" />
-                                        ) : (
-                                            <BusFront size={20} className="icon-bus" />
-                                        )}
-                                    </div>
-                                    <div>
-                                        <h3 className="list-title">{item.description}</h3>
-                                        <p className="list-subtitle">Class: {item.ticketClass}</p>
-                                    </div>
-                                </div>
-                                <div className="posted-time">
-                                    <Clock size={14} />
-                                    <span>Posted {item.postedAt}</span>
+                            <div className="trip-main">
+                                <h2 className="trip-title">
+                                    {item.source}
+                                    <ArrowRight size={18} className="trip-arrow" />
+                                    {item.destination}
+                                </h2>
+                                
+                                <p className="trip-description">
+                                    {item.description} &bull; Class: {item.ticketClass}
+                                </p>
+
+                                <div className="trip-meta">
+                                    <span className="trip-meta-item">
+                                        <Calendar size={15} />
+                                        {item.travelDate}
+                                    </span>
+                                    <span>
+                                        Posted {item.postedAt}
+                                    </span>
                                 </div>
                             </div>
 
-                            <div className="list-card-body">
-                                {/* Route Info */}
-                                <div className="route-info">
-                                    <div className="route-stop">
-                                        <span className="stop-city">{item.source}</span>
-                                        <span className="stop-date">{item.travelDate}</span>
-                                    </div>
-                                    
-                                    <div className="route-connector">
-                                        <div className="connector-dot"></div>
-                                        <div className="connector-line"><MoveRight size={16} className="route-arrow-icon" /></div>
-                                        <div className="connector-dot"></div>
-                                    </div>
+                            <div className="trip-perforation">
+                                <span className="perforation-circle top" />
+                                <span className="perforation-circle bottom" />
+                            </div>
 
-                                    <div className="route-stop">
-                                        <span className="stop-city">{item.destination}</span>
-                                        <span className="stop-date">{item.travelDate}</span>
-                                    </div>
+                            <div className="trip-action">
+                                <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--stone-900)', fontFamily: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                                    ₹{item.price}
                                 </div>
-
-                                {/* Divider & Price */}
-                                <div className="price-section-list">
-                                    <div className="price-divider"></div>
-                                    <div className="price-content">
-                                        <div className="price">₹{item.price}</div>
-                                      
-                                    </div>
-                                </div>
+                                <button
+                                    className="view-trip-btn"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigate("/marketplace/" + item.id);
+                                    }}
+                                >
+                                    View details
+                                </button>
                             </div>
                         </div>
                     ))}
