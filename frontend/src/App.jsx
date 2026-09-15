@@ -20,6 +20,7 @@ import MyListings from './pages/MyListings'
 import PostTrip from './pages/PostTrip'
 import TripMatches from './pages/TripMatches'
 import ChatsPage from './pages/ChatsPage'
+import MarketplaceChatsPage from './pages/MarketplaceChatsPage'
 import TripsPage from './pages/TripsPage'
 import TripDetailsPage from './pages/TripsDetailsPage'
 import ScrollToTop from './components/ScrollToTop'
@@ -48,6 +49,7 @@ function App() {
              <Route path='/trips' element={<TripsPage />} />
              <Route path='/view-details' element= {<TripDetailsPage />} />
              <Route path='/chats' element={<ChatsPage />} />
+             <Route path='/marketplace/chats' element={<MarketplaceChatsPage />} />
         </Route>
        
         

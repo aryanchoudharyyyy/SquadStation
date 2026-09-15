@@ -43,6 +43,7 @@ function Navbar(){
             </button>
             <button className="nav-link" onClick={()=>
                 navigate("/marketplace")}>Marketplace</button>
+            <button className="nav-link" onClick={()=> navigate("/marketplace/chats")}>Marketplace Chats</button>
             <button className="nav-link" onClick={()=> navigate("/my-listings")}>My Listings</button>
             </div>
            <div className="nav-profile-container" ref={dropdownRef}>
