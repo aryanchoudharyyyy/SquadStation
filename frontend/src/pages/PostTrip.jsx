@@ -16,7 +16,7 @@ function PostTrip() {
   return (
     <div className="pt-page">
       {/* ── Breadcrumb ── */}
-      <nav className="pt-breadcrumb pt-animate">
+      <nav className="pt-breadcrumb animate-in">
         <span className="pt-breadcrumb-link" onClick={() => navigate("/home")}>
           Home
         </span>
@@ -25,13 +25,13 @@ function PostTrip() {
       </nav>
 
       {/* ── Page Header ── */}
-      <div className="pt-header pt-animate">
+      <div className="pt-header animate-in">
         <h1>Find Travel Buddies</h1>
         <p>Enter your travel details to find students going the same way.</p>
       </div>
 
       {/* ── Form Card ── */}
-      <div className="pt-form-card card pt-animate" style={{ animationDelay: "0.1s" }}>
+      <div className="pt-form-card card animate-in" style={{ animationDelay: "0.1s" }}>
         <form onSubmit={handleSubmit}>
           
           {/* ── 1. Route Details ── */}
