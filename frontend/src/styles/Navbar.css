@@ -121,14 +121,15 @@
 }
 
 .profile-avatar {
-  background-color: var(--stone-200);
-  color: var(--stone-600);
+  background: linear-gradient(135deg, var(--accent-400, #5DCAA5), var(--orange-400, #85B7EB));
+  color: #fff;
   width: 24px;
   height: 24px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 .profile-avatar svg {
   width: 14px;
