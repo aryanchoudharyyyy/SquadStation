@@ -1,108 +1,302 @@
-/* src/styles/Profile.css */
+/* =========================================================================
+   PROFILE PAGE
+   Matches the stone-neutral, left-aligned, flat design language
+   used on Home / Marketplace / Trips pages.
+   ========================================================================= */
+
+/* ── Page Container ── */
 .pr-page {
-  padding: var(--space-8) var(--space-6);
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
 
-.pr-header-card {
+/* ── Page Title ── */
+.pr-page-title {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.pr-page-title h1 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.pr-page-title p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Header Card ── */
+.pr-header-card {
   background: var(--surface-main);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  gap: var(--space-6);
-  margin-bottom: var(--space-6);
-  box-shadow: none;
-}
-
-.pr-user-profile {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
+  align-items: flex-start;
+  gap: var(--space-6);
 }
 
+/* ── Avatar ── */
 .pr-avatar-large {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: var(--radius-full);
-  background: var(--slate-100);
-  color: var(--accent-600);
+  background: var(--accent-600);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.pr-avatar-large svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ── User Info ── */
+.pr-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.pr-user-info h2 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 24px;
-  font-weight: 700;
-}
-
-.pr-user-info h1 {
-  font-size: 22px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-primary);
-  margin-bottom: var(--space-1);
+  margin-bottom: 4px;
+  line-height: 1.2;
 }
 
-.pr-meta-row {
+.pr-meta-row span {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: 6px;
+  font-size: 13px;
   color: var(--text-secondary);
-  font-size: 14px;
+  line-height: 1.6;
 }
 
-.pr-meta-item {
-  display: flex;
+.pr-meta-row span svg {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+}
+
+/* ── Verified Badge ── */
+.pr-verified-badge {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--status-success);
+  margin-top: var(--space-2);
 }
 
-.pr-header-actions {
-  display: flex;
-  gap: var(--space-3);
+.pr-verified-badge svg {
+  flex-shrink: 0;
 }
 
+/* ── Edit Profile Button ── */
 .pr-btn-secondary {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  background: var(--surface-main);
-  color: var(--text-primary);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
+  height: 36px;
+  padding: 0 var(--space-4);
   font-size: 14px;
   font-weight: 500;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface-main);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-standard);
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: var(--space-2);
 }
 
 .pr-btn-secondary:hover {
   background: var(--surface-hover);
+  border-color: var(--text-primary);
 }
 
+.pr-btn-secondary svg {
+  color: var(--text-secondary);
+}
+
+/* ── 2-Column Grid ── */
+.pr-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+/* ── Cards ── */
+.pr-card {
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.pr-card:hover {
+  border-color: var(--border-strong);
+}
+
+.pr-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ── Info / Stat rows ── */
+.pr-info-list,
+.pr-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pr-info-row,
+.pr-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: var(--space-3) 0;
+}
+
+.pr-info-row + .pr-info-row,
+.pr-stat-row + .pr-stat-row {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.pr-info-row:first-child,
+.pr-stat-row:first-child {
+  padding-top: 0;
+}
+
+.pr-info-row:last-child,
+.pr-stat-row:last-child {
+  padding-bottom: 0;
+}
+
+.pr-info-label {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.pr-info-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.pr-stat-value {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* ── Account & Privacy Links ── */
+.pr-link-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pr-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-3) 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-primary);
+  text-align: left;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.pr-link-row:last-child {
+  border-bottom: none;
+}
+
+.pr-link-row:hover {
+  color: var(--accent-600);
+}
+
+.pr-link-row:hover .pr-link-chevron {
+  transform: translateX(3px);
+  color: var(--accent-600);
+}
+
+.pr-link-row:hover .pr-link-left svg {
+  color: var(--accent-600);
+}
+
+.pr-link-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 500;
+}
+
+.pr-link-left svg {
+  color: var(--text-tertiary);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.pr-link-chevron {
+  color: var(--text-tertiary);
+  transition: transform var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .pr-page {
     padding: var(--space-4);
   }
-  
+
+  .pr-grid-2col {
+    grid-template-columns: 1fr;
+  }
+
   .pr-header-card {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     text-align: center;
   }
-  
-  .pr-user-profile {
-    flex-direction: column;
+
+  .pr-user-info {
+    align-items: center;
   }
-  
-  .pr-meta-row {
-    justify-content: center;
-  }
-  
-  .pr-header-actions {
-    justify-content: center;
-    margin-top: var(--space-4);
+
+  .pr-btn-secondary {
+    align-self: center;
   }
 }
