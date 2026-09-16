@@ -1,0 +1,296 @@
+/* =========================================================================
+   SETTINGS PAGE
+   Stone-neutral, flat design matching the app design system.
+   ========================================================================= */
+
+/* ── Page Container ── */
+.st-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Page Title ── */
+.st-page-title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.st-page-title h1 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.st-page-title p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Card ── */
+.st-card {
+  background: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.st-card:hover {
+  border-color: var(--border-strong);
+}
+
+/* ── Card Header ── */
+.st-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.st-card-icon {
+  color: var(--accent-600);
+  flex-shrink: 0;
+}
+
+.st-card-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ── Toggle List ── */
+.st-toggle-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.st-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+}
+
+.st-toggle-row + .st-toggle-row {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.st-toggle-row:first-child {
+  padding-top: 0;
+}
+
+.st-toggle-row:last-child {
+  padding-bottom: 0;
+}
+
+.st-toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.st-toggle-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.st-toggle-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+/* ── Toggle Switch ── */
+.st-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--stone-300);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: background var(--duration-base) var(--ease-standard);
+}
+
+.st-toggle-on {
+  background: var(--accent-600);
+}
+
+.st-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.st-toggle-on .st-toggle-knob {
+  transform: translateX(20px);
+}
+
+/* ── Link List (Privacy, Help) ── */
+.st-link-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.st-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-3) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.st-link-row + .st-link-row {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.st-link-row:first-child {
+  padding-top: 0;
+}
+
+.st-link-row:last-child {
+  padding-bottom: 0;
+}
+
+.st-link-row:hover .st-link-label {
+  color: var(--accent-600);
+}
+
+.st-link-row:hover .st-link-chevron {
+  transform: translateX(3px);
+  color: var(--accent-600);
+}
+
+.st-link-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.st-link-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.st-link-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+.st-link-chevron {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+/* ── Inline link row inside toggle list (Language) ── */
+.st-link-row-inline {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  text-align: left;
+}
+
+.st-link-row-inline:hover .st-toggle-label {
+  color: var(--accent-600);
+}
+
+.st-link-value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── Danger Card (Delete Account) ── */
+.st-card-danger {
+  border-color: var(--border-subtle);
+}
+
+.st-card-danger:hover {
+  border-color: var(--status-danger);
+}
+
+.st-icon-danger {
+  color: var(--status-danger);
+}
+
+.st-danger-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
+
+.st-danger-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.st-btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 var(--space-4);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--status-danger);
+  background: transparent;
+  border: 1px solid var(--status-danger);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.st-btn-danger:hover {
+  background: var(--status-danger);
+  color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .st-page {
+    padding: var(--space-4);
+  }
+
+  .st-page-title h1 {
+    font-size: 28px;
+  }
+}

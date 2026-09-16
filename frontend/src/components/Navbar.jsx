@@ -59,7 +59,7 @@ function Navbar(){
                     <button className="menu-item" onClick={()=> {navigate("/profile"); setIsDropdownOpen(false);}}>
                         Profile
                     </button>
-                    <button className="menu-item" onClick={()=> setIsDropdownOpen(false)}>
+                    <button className="menu-item" onClick={()=> {navigate("/settings"); setIsDropdownOpen(false);}}>
                         <Settings size={16} /> Settings
                     </button>
 

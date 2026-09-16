@@ -16,6 +16,7 @@ import ListingDetail from './pages/ListingDetail'
 import Footer from './components/Footer'
 import CreateListing from './pages/CreateListing'
 import Profile from './pages/Profile'
+import SettingsPage from './pages/SettingsPage'
 import MyListings from './pages/MyListings'
 import PostTrip from './pages/PostTrip'
 import TripMatches from './pages/TripMatches'
@@ -43,6 +44,7 @@ function App() {
             <Route path='/marketplace/create' element={<CreateListing />} />
             <Route path='marketplace/:id' element={<ListingDetail />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/settings' element={<SettingsPage />} />
             <Route path='/my-listings' element={<MyListings />} />
             <Route path='/post-trip' element={<PostTrip />} />
             <Route path='/trip-matches' element={<TripMatches />} />
