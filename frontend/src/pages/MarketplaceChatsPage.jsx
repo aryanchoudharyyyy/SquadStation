@@ -148,11 +148,17 @@ function ChatArea({ conversation, messages, connectionStatus, onSendMessage, use
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   const connected = connectionStatus === "connected";
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }
   }, [messages]);
 
   const handleInput = (e) => {
@@ -211,7 +217,7 @@ function ChatArea({ conversation, messages, connectionStatus, onSendMessage, use
         </div>
       </div>
 
-      <div className="chat-messages-area">
+      <div className="chat-messages-area" ref={chatContainerRef}>
         <div className="chat-intro-block">
           <h3 className="chat-intro-block-title">{conversation.listingTitle}</h3>
           <p className="chat-intro-block-desc">
