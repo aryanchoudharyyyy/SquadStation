@@ -26,6 +26,7 @@ import TripsPage from './pages/TripsPage'
 import TripDetailsPage from './pages/TripsDetailsPage'
 import ScrollToTop from './components/ScrollToTop'
 import SafetyGuidelinesPage from './pages/SafetyGuidelinesPage'
+import HelpFaqPage from './pages/HelpFaqPage'
 function App() {
   
 
@@ -54,6 +55,7 @@ function App() {
              <Route path='/chats' element={<ChatsPage />} />
              <Route path='/marketplace/chats' element={<MarketplaceChatsPage />} />
              <Route path='/safety' element={<SafetyGuidelinesPage />} />
+             <Route path='/help' element={<HelpFaqPage />} />
         </Route>
        
         
