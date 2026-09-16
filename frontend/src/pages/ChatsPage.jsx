@@ -182,12 +182,18 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
-
+  const chatContainRef = useRef(null);
   const connected = connectionStatus === "connected";
 
   // Auto-scroll on new messages
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+
+   if(chatContainRef.current){
+    chatContainRef.current.scrollTo({
+      top: chatContainRef.current.scrollHeight,
+      behaviour: "smooth"
+    });
+   }
   }, [messages]);
 
   const handleInput = (e) => {
@@ -251,7 +257,7 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
       </div>
 
       {/* Messages */}
-      <div className="chat-messages-area">
+      <div className="chat-messages-area" ref={chatContainRef}>
         <div className="chat-intro-block">
           <h3 className="chat-intro-block-title">{group.route}</h3>
           <p className="chat-intro-block-desc">
@@ -356,6 +362,7 @@ export default function ChatsPage() {
   const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+ 
 
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [messages, setMessages] = useState([]);
