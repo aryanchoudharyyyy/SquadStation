@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     Bell, Lock, Settings, Globe, Moon, HelpCircle, Mail,
     ChevronRight, Trash2, ShieldAlert, BookOpen, FileText,
@@ -7,6 +8,7 @@ import {
 import "../styles/Settings.css";
 
 function SettingsPage() {
+    const navigate = useNavigate();
     const [tripUpdates, setTripUpdates] = useState(true);
     const [groupMessages, setGroupMessages] = useState(true);
     const [marketplaceActivity, setMarketplaceActivity] = useState(true);
@@ -89,7 +91,7 @@ function SettingsPage() {
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
 
-                    <button className="st-link-row">
+                    <button className="st-link-row" onClick={() => navigate('/safety')}>
                         <div className="st-link-info">
                             <span className="st-link-label">Safety Guidelines</span>
                         </div>
