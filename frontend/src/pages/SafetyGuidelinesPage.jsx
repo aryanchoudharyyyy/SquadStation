@@ -59,37 +59,37 @@ const SafetyGuidelinesPage = () => {
 
   return (
     <div className="safety-page-container">
-      <div className="safety-header-top">
+      <div className="safety-header-top animate-in" style={{ animationDelay: "0s" }}>
         <button className="back-btn" onClick={() => navigate(-1)}>
           <ArrowLeft size={18} /> Safety Guidelines
         </button>
       </div>
 
-      <div className="safety-hero">
+      <div className="safety-hero animate-in" style={{ animationDelay: "0.05s" }}>
         <div className="safety-hero-icon">🛡️</div>
-        <h1>Travel together.<br/>Stay safe.</h1>
-        <p>Simple guidelines to help you travel confidently with your squad.</p>
+        <h1 className="text-h1">Travel together.<br/>Stay safe.</h1>
+        <p className="text-body-lg">Simple guidelines to help you travel confidently with your squad.</p>
       </div>
 
       <div className="safety-cards-grid">
-        {guidelines.map((item) => (
-          <div key={item.id} className="safety-card">
+        {guidelines.map((item, index) => (
+          <div key={item.id} className="safety-card animate-in" style={{ animationDelay: `${0.1 + (index * 0.05)}s` }}>
             <div className="safety-card-icon">{item.icon}</div>
             <div className="safety-card-content">
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
+              <h3 className="text-h3">{item.title}</h3>
+              <p className="text-body">{item.desc}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="quick-check-card">
+      <div className="quick-check-card animate-in" style={{ animationDelay: "0.5s" }}>
         <div className="quick-check-header">
           <span className="quick-check-icon">🛡️</span>
-          <h2>Quick Safety Check</h2>
+          <h2 className="text-h2">Quick Safety Check</h2>
         </div>
-        <p style={{marginBottom: "1rem", color: "#e0e7ff"}}>Before you travel:</p>
-        <ul className="quick-check-list">
+        <p className="quick-check-desc text-body">Before you travel:</p>
+        <ul className="quick-check-list text-body">
           <li><span className="check-icon">✓</span> Confirm the meeting point</li>
           <li><span className="check-icon">✓</span> Check your squad members</li>
           <li><span className="check-icon">✓</span> Confirm the fare</li>
@@ -99,8 +99,8 @@ const SafetyGuidelinesPage = () => {
         </ul>
       </div>
 
-      <div className="safety-footer">
-        <p>Your safety comes first. College Travel is a platform for coordinating travel between students; always use your own judgment when deciding who to travel with.</p>
+      <div className="safety-footer animate-in" style={{ animationDelay: "0.55s" }}>
+        <p className="text-caption">Your safety comes first. College Travel is a platform for coordinating travel between students; always use your own judgment when deciding who to travel with.</p>
       </div>
     </div>
   );

@@ -1,136 +1,169 @@
+/* =========================================================================
+   SAFETY GUIDELINES PAGE
+   Stone-neutral, flat design matching the app design system.
+   ========================================================================= */
+
 .safety-page-container {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #333;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  color: var(--text-primary);
 }
 
+/* ── Back Button ── */
 .safety-header-top {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
 }
 
 .back-btn {
   background: none;
   border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #4f46e5;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
+  gap: var(--space-2);
+  padding: 0;
+  font-family: inherit;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .back-btn:hover {
-  text-decoration: underline;
+  color: var(--text-primary);
 }
 
+.back-btn:hover svg {
+  transform: translateX(-2px);
+}
+
+.back-btn svg {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+/* ── Hero Section ── */
 .safety-hero {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
-  border-radius: 16px;
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
 }
 
 .safety-hero-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 40px;
+  margin-bottom: var(--space-3);
 }
 
 .safety-hero h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin: 0 0 0.5rem 0;
-  color: #1e1b4b;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 32px;
+  font-weight: 400;
   line-height: 1.2;
+  margin: 0 0 var(--space-2) 0;
+  color: var(--text-primary);
 }
 
 .safety-hero p {
-  font-size: 1.1rem;
-  color: #4338ca;
-  margin: 0;
-  max-width: 500px;
+  color: var(--text-secondary);
   margin: 0 auto;
+  max-width: 480px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
+/* ── Cards Grid ── */
 .safety-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  gap: var(--space-4);
 }
 
 .safety-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
   display: flex;
-  gap: 1rem;
+  gap: var(--space-4);
   align-items: flex-start;
+  transition: border-color var(--duration-fast) var(--ease-standard);
 }
 
 .safety-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: var(--border-strong);
 }
 
 .safety-card-icon {
-  font-size: 1.8rem;
-  background: #f3f4f6;
-  width: 48px;
-  height: 48px;
+  font-size: 20px;
+  background-color: var(--surface-subtle);
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   flex-shrink: 0;
+  border: 1px solid var(--border-subtle);
 }
 
 .safety-card-content h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-  color: #111827;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 var(--space-1) 0;
+  color: var(--text-primary);
 }
 
 .safety-card-content p {
   margin: 0;
-  color: #4b5563;
-  font-size: 0.95rem;
+  font-size: 13px;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
+/* ── Quick Safety Check ── */
 .quick-check-card {
-  background: #1e1b4b;
-  color: #ffffff;
-  border-radius: 16px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.quick-check-card:hover {
+  border-color: var(--border-strong);
 }
 
 .quick-check-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .quick-check-header h2 {
+  font-size: 15px;
+  font-weight: 600;
   margin: 0;
-  font-size: 1.5rem;
+  color: var(--text-primary);
 }
 
 .quick-check-icon {
-  font-size: 1.5rem;
+  font-size: 20px;
+}
+
+.quick-check-desc {
+  margin: 0 0 var(--space-4) 0;
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
 .quick-check-list {
@@ -139,38 +172,48 @@
   margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: var(--space-3);
 }
 
 .quick-check-list li {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 1.05rem;
-  color: #e0e7ff;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--text-primary);
 }
 
 .check-icon {
-  color: #10b981;
-  font-weight: bold;
+  color: var(--status-success);
+  font-weight: 700;
+  font-size: 14px;
 }
 
+/* ── Footer ── */
 .safety-footer {
   text-align: center;
-  color: #6b7280;
-  font-size: 0.95rem;
-  padding-top: 2rem;
-  border-top: 1px solid #e5e7eb;
+  color: var(--text-tertiary);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
 }
 
+.safety-footer p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Responsive ── */
 @media (max-width: 600px) {
-  .safety-hero h1 {
-    font-size: 1.8rem;
+  .safety-page-container {
+    padding: var(--space-4);
   }
+
   .safety-cards-grid {
     grid-template-columns: 1fr;
   }
-  .quick-check-card {
-    padding: 1.5rem;
+
+  .safety-hero h1 {
+    font-size: 26px;
   }
 }
