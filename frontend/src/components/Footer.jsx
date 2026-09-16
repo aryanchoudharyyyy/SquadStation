@@ -29,7 +29,7 @@ function Footer(){
           </div>
           <div className="footer-column">
             <h4>Resources</h4>
-            <Link to="#">Safety Guidelines</Link>
+            <Link to="/safety">Safety Guidelines</Link>
             <Link to="#">FAQs</Link>
             <Link to="#">Campus Rules</Link>
           </div>

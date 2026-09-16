@@ -25,6 +25,7 @@ import MarketplaceChatsPage from './pages/MarketplaceChatsPage'
 import TripsPage from './pages/TripsPage'
 import TripDetailsPage from './pages/TripsDetailsPage'
 import ScrollToTop from './components/ScrollToTop'
+import SafetyGuidelinesPage from './pages/SafetyGuidelinesPage'
 function App() {
   
 
@@ -52,6 +53,7 @@ function App() {
              <Route path='/view-details' element= {<TripDetailsPage />} />
              <Route path='/chats' element={<ChatsPage />} />
              <Route path='/marketplace/chats' element={<MarketplaceChatsPage />} />
+             <Route path='/safety' element={<SafetyGuidelinesPage />} />
         </Route>
        
         
