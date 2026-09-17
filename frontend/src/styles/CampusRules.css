@@ -1,0 +1,157 @@
+/* =========================================================================
+   CAMPUS RULES PAGE
+   Stone-neutral, flat design matching the app design system.
+   ========================================================================= */
+
+.rules-page-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  color: var(--text-primary);
+}
+
+/* ── Hero Section ── */
+.rules-hero {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.rules-hero-icon {
+  font-size: 40px;
+  margin-bottom: var(--space-3);
+}
+
+.rules-hero h1 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 var(--space-2) 0;
+  color: var(--text-primary);
+}
+
+.rules-hero p {
+  color: var(--text-secondary);
+  margin: 0 auto;
+  max-width: 480px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Cards Grid ── */
+.rules-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+.rules-card {
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.rules-card:hover {
+  border-color: var(--border-strong);
+}
+
+.rules-card-icon {
+  font-size: 20px;
+  background-color: var(--surface-subtle);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  border: 1px solid var(--border-subtle);
+}
+
+.rules-card-content h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 var(--space-1) 0;
+  color: var(--text-primary);
+}
+
+.rules-card-content p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Report Card ── */
+.rules-report-card {
+  text-align: center;
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-6);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.rules-report-card:hover {
+  border-color: var(--border-strong);
+}
+
+.rules-report-icon {
+  font-size: 32px;
+  margin-bottom: var(--space-3);
+}
+
+.rules-report-card h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 var(--space-2) 0;
+  color: var(--text-primary);
+}
+
+.rules-report-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Footer ── */
+.rules-footer {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.rules-footer p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .rules-page-container {
+    padding: var(--space-4);
+  }
+
+  .rules-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rules-hero h1 {
+    font-size: 26px;
+  }
+}

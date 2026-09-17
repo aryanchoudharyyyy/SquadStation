@@ -97,6 +97,13 @@ function SettingsPage() {
                         </div>
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
+
+                    <button className="st-link-row" onClick={() => navigate('/campus-rules')}>
+                        <div className="st-link-info">
+                            <span className="st-link-label">Campus Rules</span>
+                        </div>
+                        <ChevronRight size={16} className="st-link-chevron" />
+                    </button>
                 </div>
             </div>
 

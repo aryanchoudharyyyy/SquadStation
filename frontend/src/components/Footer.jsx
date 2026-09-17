@@ -31,7 +31,7 @@ function Footer(){
             <h4>Resources</h4>
             <Link to="/safety">Safety Guidelines</Link>
             <Link to="/help">FAQs</Link>
-            <Link to="#">Campus Rules</Link>
+            <Link to="/campus-rules">Campus Rules</Link>
           </div>
           <div className="footer-column">
             <h4>Company</h4>

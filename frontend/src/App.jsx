@@ -27,6 +27,7 @@ import TripDetailsPage from './pages/TripsDetailsPage'
 import ScrollToTop from './components/ScrollToTop'
 import SafetyGuidelinesPage from './pages/SafetyGuidelinesPage'
 import HelpFaqPage from './pages/HelpFaqPage'
+import CampusRulesPage from './pages/CampusRulesPage'
 function App() {
   
 
@@ -56,6 +57,7 @@ function App() {
              <Route path='/marketplace/chats' element={<MarketplaceChatsPage />} />
              <Route path='/safety' element={<SafetyGuidelinesPage />} />
              <Route path='/help' element={<HelpFaqPage />} />
+             <Route path='/campus-rules' element={<CampusRulesPage />} />
         </Route>
        
         
