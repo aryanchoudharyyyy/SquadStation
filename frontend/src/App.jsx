@@ -29,6 +29,7 @@ import SafetyGuidelinesPage from './pages/SafetyGuidelinesPage'
 import HelpFaqPage from './pages/HelpFaqPage'
 import CampusRulesPage from './pages/CampusRulesPage'
 import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
 function App() {
   
 
@@ -60,6 +61,7 @@ function App() {
              <Route path='/help' element={<HelpFaqPage />} />
              <Route path='/campus-rules' element={<CampusRulesPage />} />
              <Route path='/about' element={<AboutPage />} />
+             <Route path='/contact' element={<ContactPage />} />
         </Route>
        
         

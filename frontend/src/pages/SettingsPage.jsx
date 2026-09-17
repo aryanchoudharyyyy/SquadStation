@@ -166,7 +166,7 @@ function SettingsPage() {
                         <span className="st-link-label">Help & FAQs</span>
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
-                    <button className="st-link-row">
+                    <button className="st-link-row" onClick={() => navigate('/contact')}>
                         <span className="st-link-label">Contact Support</span>
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
