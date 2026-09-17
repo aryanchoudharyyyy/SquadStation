@@ -43,7 +43,7 @@ function PostTrip() {
                 <label className="pt-label">Source Point (Start)</label>
                 <div className="pt-input-wrapper">
                   <MapPin size={18} className="pt-input-icon text-blue" />
-                  <input type="text" placeholder="e.g., KIET Gate" className="input pt-input" required />
+                  <input type="text" placeholder="e.g., KIET Gate" className="pt-input" required />
                 </div>
               </div>
 
@@ -55,7 +55,7 @@ function PostTrip() {
                 <label className="pt-label">Boarding Station</label>
                 <div className="pt-input-wrapper">
                   <Navigation size={18} className="pt-input-icon text-orange" />
-                  <input type="text" placeholder="e.g., Ghaziabad Railway Station" className="input pt-input" required />
+                  <input type="text" placeholder="e.g., Ghaziabad Railway Station" className="pt-input" required />
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@ function PostTrip() {
               <label className="pt-label">Final Destination <span className="pt-optional">(Optional)</span></label>
               <div className="pt-input-wrapper">
                 <MapPin size={18} className="pt-input-icon text-green" />
-                <input type="text" placeholder="e.g., Mumbai Central" className="input pt-input" />
+                <input type="text" placeholder="e.g., Mumbai Central" className="pt-input" />
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@ function PostTrip() {
                 <label className="pt-label">Travel Date</label>
                 <div className="pt-input-wrapper">
                   <Calendar size={18} className="pt-input-icon text-blue" />
-                  <input type="date" className="input pt-input" required />
+                  <input type="date" className="pt-input" required />
                 </div>
               </div>
 
@@ -89,9 +89,9 @@ function PostTrip() {
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <div className="pt-input-wrapper" style={{ flex: 1 }}>
                     <Clock size={18} className="pt-input-icon text-orange" />
-                    <input type="text" placeholder="hh:mm" className="input pt-input" required />
+                    <input type="text" placeholder="hh:mm" className="pt-input" required />
                   </div>
-                  <select className="input pt-input" style={{ width: '80px', padding: '0 12px', cursor: 'pointer', appearance: 'none', textAlign: 'center' }}>
+                  <select className="pt-input" style={{ width: '80px', padding: '0 12px', cursor: 'pointer', appearance: 'none', textAlign: 'center' }}>
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
                   </select>
@@ -103,7 +103,7 @@ function PostTrip() {
               <label className="pt-label">Vehicle/Train No. <span className="pt-optional">(Optional)</span></label>
               <div className="pt-input-wrapper">
                 <Hash size={18} className="pt-input-icon text-gray" />
-                <input type="text" placeholder="e.g., 12951" className="input pt-input" />
+                <input type="text" placeholder="e.g., 12951" className="pt-input" />
               </div>
             </div>
           </div>
