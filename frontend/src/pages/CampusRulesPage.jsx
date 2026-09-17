@@ -44,7 +44,7 @@ const rules = [
     id: 7,
     icon: "📢",
     title: "No Fake Trips or Spam",
-    desc: "Don't create fake trips, impersonate others, scam students, or use SquadStation for spam.",
+    desc: "Don't create fake trips, impersonate others, scam students, or use College Travel for spam.",
   },
 ];
 
@@ -91,7 +91,7 @@ const CampusRulesPage = () => {
         <div className="rules-report-icon">🚩</div>
         <h2 className="text-h2">Something doesn't feel right?</h2>
         <p className="text-body">
-          Report a user or trip and let the SquadStation team review it.
+          Report a user or trip and let the College Travel team review it.
         </p>
         <button className="btn btn-primary btn-lg" style={{ marginTop: "8px" }}>
           <Flag size={18} /> Report an Issue
@@ -100,7 +100,7 @@ const CampusRulesPage = () => {
 
       <div className="rules-footer animate-in" style={{ animationDelay: "0.55s" }}>
         <p className="text-caption">
-          By using SquadStation you agree to follow these rules. Violations may
+          By using College Travel you agree to follow these rules. Violations may
           lead to warnings, restrictions, or account removal.
         </p>
       </div>

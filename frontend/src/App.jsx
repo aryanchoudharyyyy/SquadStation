@@ -28,6 +28,7 @@ import ScrollToTop from './components/ScrollToTop'
 import SafetyGuidelinesPage from './pages/SafetyGuidelinesPage'
 import HelpFaqPage from './pages/HelpFaqPage'
 import CampusRulesPage from './pages/CampusRulesPage'
+import AboutPage from './pages/AboutPage'
 function App() {
   
 
@@ -58,6 +59,7 @@ function App() {
              <Route path='/safety' element={<SafetyGuidelinesPage />} />
              <Route path='/help' element={<HelpFaqPage />} />
              <Route path='/campus-rules' element={<CampusRulesPage />} />
+             <Route path='/about' element={<AboutPage />} />
         </Route>
        
         

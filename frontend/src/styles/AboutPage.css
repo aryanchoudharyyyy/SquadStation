@@ -1,0 +1,258 @@
+/* =========================================================================
+   ABOUT PAGE
+   Stone-neutral, flat design matching the app design system.
+   ========================================================================= */
+
+.about-page-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  color: var(--text-primary);
+}
+
+/* ── Hero ── */
+.about-hero {
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.about-hero-icon {
+  font-size: 36px;
+  margin-bottom: var(--space-3);
+  opacity: 0.8;
+}
+
+.about-hero h1 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 var(--space-3) 0;
+  color: var(--text-primary);
+}
+
+.about-hero p {
+  color: var(--text-secondary);
+  margin: 0 auto;
+  max-width: 520px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── Sections ── */
+.about-section {
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-6);
+}
+
+.about-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-section-emoji {
+  font-size: 22px;
+}
+
+.about-section-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.about-section-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-3) 0;
+  max-width: 600px;
+}
+
+/* ── Journey Flow ── */
+.about-journey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding: var(--space-5) var(--space-4);
+  background-color: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  flex-wrap: wrap;
+}
+
+.about-journey-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.about-journey-icon {
+  font-size: 24px;
+}
+
+.about-journey-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.about-journey-arrow {
+  font-size: 18px;
+  color: var(--text-tertiary);
+  margin-bottom: 14px; /* align with icon, above label */
+}
+
+/* ── Features Grid ── */
+.about-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.about-feature-card {
+  background-color: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.about-feature-card:hover {
+  border-color: var(--border-strong);
+}
+
+.about-feature-icon {
+  font-size: 22px;
+  margin-bottom: var(--space-3);
+}
+
+.about-feature-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 var(--space-1) 0;
+  color: var(--text-primary);
+}
+
+.about-feature-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Quote Card ── */
+.about-quote-card {
+  text-align: center;
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-6);
+}
+
+.about-quote-emoji {
+  font-size: 28px;
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.about-quote-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 var(--space-4) 0;
+  color: var(--text-primary);
+}
+
+.about-quote-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 auto var(--space-3);
+  max-width: 520px;
+}
+
+.about-blockquote {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: var(--space-5) auto;
+  padding: var(--space-4) var(--space-6);
+  border-left: 3px solid var(--border-strong);
+  max-width: 440px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* ── Vision Card ── */
+.about-vision-card {
+  text-align: center;
+  background-color: var(--surface-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-6);
+}
+
+.about-vision-emoji {
+  font-size: 28px;
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.about-vision-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 var(--space-3) 0;
+  color: var(--text-primary);
+}
+
+.about-vision-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .about-page-container {
+    padding: var(--space-4);
+  }
+
+  .about-hero h1 {
+    font-size: 26px;
+  }
+
+  .about-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-journey {
+    gap: var(--space-2);
+  }
+
+  .about-blockquote {
+    font-size: 16px;
+    padding: var(--space-3) var(--space-4);
+  }
+}
