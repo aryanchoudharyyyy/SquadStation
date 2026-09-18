@@ -1,95 +1,123 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Users, Clock, MessageSquare, User, ShieldPlus, Compass } from "lucide-react";
-import "../styles/TripsPage.css";
+import "../styles/TripMatches.css";
 
 // Mock data based on the requirements
 const mockMatches = [
-  { id: 1, name: "Aman Sharma", time: "10:30 AM", inGroup: true, groupId: 101 },
-  { id: 2, name: "Priya Singh", time: "10:45 AM", inGroup: false, groupId: null },
-  { id: 3, name: "Rahul Verma", time: "10:30 AM", inGroup: true, groupId: 102 }
+  { id: 1, name: "Aman Sharma", source: "Campus", destination: "Station", mode: "Cab", date: "Today", time: "10:30 AM", inGroup: true, groupId: 101 },
+  { id: 2, name: "Priya Singh", source: "Campus", destination: "Station", mode: "Cab", date: "Today", time: "10:45 AM", inGroup: false, groupId: null },
+  { id: 3, name: "Rahul Verma", source: "Campus", destination: "Station", mode: "Cab", date: "Today", time: "10:30 AM", inGroup: true, groupId: 102 }
 ];
+
+// "Aman Sharma" -> "AS"
+function getInitials(name) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join("");
+}
 
 function TripMatches() {
   const navigate = useNavigate();
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [openMenuId, setOpenMenuId] = useState(null);
 
-  const toggleDropdown = (id) => {
-    if (activeDropdown === id) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(id);
-    }
+  const toggleMenu = (id) => {
+    setOpenMenuId((current) => (current === id ? null : id));
   };
 
   return (
-    <div className="trips-page">
-      <div className="trips-container">
-        
+    <div className="tm-trips-page">
+      <div className="tm-trips-container">
+
         {/* Header */}
-        <div className="trips-header">
-          <div className="header-content">
-            <p className="header-label">
+        <div className="tm-trips-header">
+          <div className="tm-header-content">
+            <p className="tm-header-label">
               <Compass size={16} strokeWidth={2.5} />
               Trip Matches
             </p>
-            <h1 className="header-title">
+            <h1 className="tm-header-title">
               Find your squad
             </h1>
-            <p className="header-description">
+            <p className="tm-header-description">
               We found {mockMatches.length} students traveling on similar routes.
             </p>
           </div>
-          
-          <button className="post-trip-btn" onClick={() => navigate("/chats")}>
+
+          <button className="tm-post-trip-btn" onClick={() => navigate("/chats")}>
             <Users size={18} />
             Create Group
           </button>
         </div>
 
         {/* Matches List */}
-        <div className="trip-list" style={{ paddingTop: '24px' }}>
+        <div className="tm-match-list" style={{ paddingTop: "24px" }}>
           {mockMatches.map((match) => (
-            <div key={match.id} className="trip-card">
-              
-              <div className="trip-main">
-                <h2 className="trip-title" style={{ fontSize: '20px' }}>
-                  {match.name}
-                </h2>
-                <div style={{ fontSize: "14px", color: "var(--stone-600)", margin: "8px 0" }}>
-                  <strong>{match.source}</strong> to <strong>{match.destination}</strong> ({match.mode})
+            <div key={match.id} className="tm-match-card">
+
+              <div className="tm-match-avatar">
+                {getInitials(match.name)}
+              </div>
+
+              <div className="tm-match-body">
+                <div className="tm-match-top">
+                  <h2 className="tm-match-name">{match.name}</h2>
+                  {match.inGroup && (
+                    <span className="tm-match-badge">In a group</span>
+                  )}
                 </div>
-                
-                <div className="trip-meta">
-                  <span className="trip-meta-item">
-                    <Clock size={15} /> {match.date} at {match.time}
+
+                <div className="tm-match-route">
+                  <span className="tm-route-place">{match.source || "Campus"}</span>
+                  <span className="tm-route-track">
+                    <span className="tm-route-dot" />
+                    <span className="tm-route-line" />
+                    <span className="tm-route-dot end" />
                   </span>
+                  <span className="tm-route-place">{match.destination || "Station"}</span>
+                  <span className="tm-route-mode">{match.mode || "Cab"}</span>
+                </div>
+
+                <div className="tm-match-time">
+                  <Clock size={14} />
+                  {match.date || "Today"} at {match.time}
                 </div>
               </div>
 
-              {/* Action Dropdown */}
-              <div className="trip-action" style={{ justifyContent: 'center' }}>
-                <button 
-                  className="view-trip-btn" 
-                  onClick={() => toggleDropdown(match.id)}
+              <div className="tm-match-actions">
+                <button
+                  className="tm-chat-btn"
+                  aria-expanded={openMenuId === match.id}
+                  onClick={() => toggleMenu(match.id)}
                 >
-                  <MessageSquare size={16} style={{ marginRight: '6px' }} /> Chat
+                  <MessageSquare size={16} />
+                  Chat
                 </button>
 
-                {activeDropdown === match.id && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
-                    <button className="btn btn-secondary btn-sm" onClick={() => navigate("/chats")}>
-                      <User size={14} /> Personal Chat
-                    </button>
-                    {match.inGroup && (
-                      <button className="btn btn-secondary btn-sm" onClick={() => navigate("/chats")}>
-                        <ShieldPlus size={14} /> Join Group
+                {openMenuId === match.id && (
+                  <>
+                    {/* Click-outside catcher */}
+                    <div
+                      className="tm-menu-backdrop"
+                      onClick={() => setOpenMenuId(null)}
+                    />
+                    <div className="tm-action-menu">
+                      <button onClick={() => navigate("/chats")}>
+                        <User size={14} /> Personal chat
                       </button>
-                    )}
-                  </div>
+                      {match.inGroup && (
+                        <button onClick={() => navigate("/chats")}>
+                          <ShieldPlus size={14} /> Join group
+                        </button>
+                      )}
+                    </div>
+                  </>
                 )}
               </div>
-              
+
             </div>
           ))}
         </div>
