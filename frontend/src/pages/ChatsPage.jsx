@@ -202,7 +202,7 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${Math.min(
         textareaRef.current.scrollHeight,
-        300
+        120
       )}px`;
     }
   };
@@ -298,6 +298,13 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
       {/* Composer */}
       <div className="chat-composer-wrap">
         <div className="chat-composer-box">
+          <button className="chat-composer-btn icon-btn" title="Attach file">
+            <Paperclip size={20} />
+          </button>
+          <button className="chat-composer-btn icon-btn" title="Add emoji">
+            <Smile size={20} />
+          </button>
+
           <textarea
             ref={textareaRef}
             className="chat-composer-input"
@@ -307,26 +314,15 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
             onKeyDown={handleKeyDown}
             rows={1}
           />
-          <div className="chat-composer-toolbar">
-            <div className="chat-composer-tools-left">
-              <button className="chat-composer-btn" title="Attach file">
-                <Paperclip size={16} />
-              </button>
-              <button className="chat-composer-btn" title="Add emoji">
-                <Smile size={16} />
-              </button>
-            </div>
-            <div className="chat-composer-tools-right">
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={handleSend}
-                disabled={!inputText.trim() || !connected}
-                title="Send message"
-              >
-                <Send size={14} />
-              </button>
-            </div>
-          </div>
+          
+          <button
+            className="chat-send-btn"
+            onClick={handleSend}
+            disabled={!inputText.trim() || !connected}
+            title="Send message"
+          >
+            <Send size={18} />
+          </button>
         </div>
       </div>
     </div>
