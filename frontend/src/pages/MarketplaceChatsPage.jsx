@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import ChatComposer from "./ChatComposer";
 import {
   connectMarketplaceWebSocket,
   sendMarketplaceMessage,
@@ -250,39 +251,11 @@ function ChatArea({ conversation, messages, connectionStatus, onSendMessage, use
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="chat-composer-wrap">
-        <div className="chat-composer-box">
-          <textarea
-            ref={textareaRef}
-            className="chat-composer-input"
-            placeholder={`Message ${conversation.otherUserName}...`}
-            value={inputText}
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            rows={1}
-          />
-          <div className="chat-composer-toolbar">
-            <div className="chat-composer-tools-left">
-              <button className="chat-composer-btn" title="Attach file">
-                <Paperclip size={16} />
-              </button>
-              <button className="chat-composer-btn" title="Add emoji">
-                <Smile size={16} />
-              </button>
-            </div>
-            <div className="chat-composer-tools-right">
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={handleSend}
-                disabled={!inputText.trim() || !connected}
-                title="Send message"
-              >
-                <Send size={14} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ChatComposer
+  placeholder={`Message ${conversation.otherUserName}...`}
+  connected={connected}
+  onSendMessage={onSendMessage}
+/>
     </div>
   );
 }

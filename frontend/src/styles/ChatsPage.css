@@ -15,6 +15,7 @@
 /* =========================================================
    LEFT PANEL — Group List
    ========================================================= */
+
 .chats-left-panel {
   width: 340px;
   border-right: 1px solid var(--border-subtle);
@@ -32,9 +33,7 @@
 }
 
 .chat-group-list-header {
- 
   padding: 8px 20px 10px;
-
   border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
@@ -43,8 +42,7 @@
 }
 
 .chat-group-list-header h1 {
-  font-family: ui-serif, Georgia, Cambria,
-    "Times New Roman", Times, serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 28px;
   font-weight: 400;
   line-height: 1.1;
@@ -64,7 +62,10 @@
   padding: var(--space-2) 0;
 }
 
-/* Individual Group Item */
+/* =========================================================
+   Individual Group Item
+   ========================================================= */
+
 .chat-group-item {
   display: flex;
   align-items: flex-start;
@@ -90,9 +91,11 @@
   border-radius: var(--radius-full);
   background-color: var(--accent-50);
   color: var(--accent-600);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -107,6 +110,7 @@
   font-weight: 600;
   color: var(--text-primary);
   margin: 0 0 2px 0;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -116,6 +120,7 @@
   font-size: 13px;
   color: var(--text-secondary);
   margin: 0;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -137,18 +142,24 @@
 .chat-group-members {
   font-size: 11px;
   color: var(--text-tertiary);
+
   display: flex;
   align-items: center;
   gap: 3px;
 }
 
-/* Empty Groups State */
+/* =========================================================
+   Empty Groups State
+   ========================================================= */
+
 .chat-empty-groups {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   padding: var(--space-8) var(--space-4);
+
   color: var(--text-tertiary);
   text-align: center;
 }
@@ -156,7 +167,9 @@
 .chat-empty-groups p {
   font-size: 14px;
   font-weight: 500;
+
   margin: var(--space-3) 0 var(--space-1) 0;
+
   color: var(--text-secondary);
 }
 
@@ -164,51 +177,73 @@
   font-size: 13px;
 }
 
-
 /* =========================================================
-   RIGHT PANEL — Chat Area or Empty State
+   RIGHT PANEL — Chat Area / Empty State
    ========================================================= */
+
 .chats-right-panel {
   flex: 1;
+
   display: flex;
   flex-direction: column;
+
   min-width: 0;
+
   background-color: var(--surface-main);
+
   position: relative;
 }
 
-/* Mobile back button (hidden on desktop) */
+/* =========================================================
+   Mobile Back Button
+   ========================================================= */
+
 .chat-mobile-back {
   display: none;
 }
 
-/* Chat Area */
+/* =========================================================
+   Chat Area
+   ========================================================= */
+
 .chat-area {
   flex: 1;
+
   display: flex;
   flex-direction: column;
+
   min-height: 0;
 }
 
-/* Chat Header */
+/* =========================================================
+   Chat Header
+   ========================================================= */
+
 .chat-area-header {
   height: 52px;
+
   padding: 0 16px;
+
   border-bottom: 1px solid var(--border-subtle);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   flex-shrink: 0;
-  position: sticky;
-  top: 12px;
+
+  position: relative;
   z-index: 2;
+
   background-color: var(--surface-main);
 }
 
 .chat-area-room-name {
   font-size: 15px;
   font-weight: 600;
+
   margin: 0;
+
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -217,9 +252,11 @@
 .chat-area-room-meta {
   font-size: 12px;
   color: var(--text-tertiary);
+
   display: flex;
   align-items: center;
   gap: var(--space-2);
+
   margin-top: 2px;
 }
 
@@ -245,9 +282,17 @@
 }
 
 @keyframes chatPulse {
-  0% { opacity: 0.4; }
-  50% { opacity: 1; }
-  100% { opacity: 0.4; }
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
 }
 
 .chat-area-header-actions {
@@ -260,9 +305,13 @@
   background: transparent;
   border: none;
   color: inherit;
+
   cursor: pointer;
+
   padding: 4px;
+
   border-radius: var(--radius-sm);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,41 +322,60 @@
   color: var(--text-secondary);
 }
 
-
 /* =========================================================
    MESSAGES AREA
    ========================================================= */
+
 .chat-messages-area {
   flex: 1;
+
   overflow-y: auto;
+
   padding: var(--space-6) 0 var(--space-4) 0;
+
   display: flex;
   flex-direction: column;
+
+  min-height: 0;
 }
 
-/* Chat Intro Block */
+/* =========================================================
+   Chat Intro Block
+   ========================================================= */
+
 .chat-intro-block {
   padding: 0 var(--space-6) var(--space-6) var(--space-6);
+
+  /*
+    Keeps the intro near the bottom when the chat
+    has no messages, matching your current design.
+  */
   margin-top: auto;
 }
 
 .chat-intro-block-title {
   font-size: 18px;
   font-weight: 600;
+
   margin: 0 0 var(--space-2) 0;
+
   color: var(--text-primary);
 }
 
 .chat-intro-block-desc {
   font-size: 14px;
+
   color: var(--text-secondary);
+
   margin: 0 0 var(--space-3) 0;
 }
 
 .chat-intro-block-details {
   display: flex;
   gap: var(--space-4);
+
   font-size: 13px;
+
   color: var(--text-tertiary);
 }
 
@@ -317,13 +385,15 @@
   gap: 4px;
 }
 
-
 /* =========================================================
    MESSAGE BUBBLES
    ========================================================= */
+
 .chat-message {
   display: flex;
+
   padding: 4px var(--space-6);
+
   position: relative;
 }
 
@@ -334,8 +404,11 @@
 
 .chat-msg-avatar-col {
   width: 32px;
+
   flex-shrink: 0;
+
   margin-right: var(--space-3);
+
   display: flex;
   justify-content: flex-end;
 }
@@ -343,11 +416,16 @@
 .chat-msg-avatar {
   width: 32px;
   height: 32px;
+
   border-radius: var(--radius-full);
+
   background-color: var(--accent-600);
+
   color: var(--text-inverse);
+
   font-size: 11px;
   font-weight: 600;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,10 +433,14 @@
 
 .chat-msg-time-hover {
   font-size: 11px;
+
   color: var(--text-tertiary);
+
   opacity: 0;
+
   margin-top: 6px;
   margin-right: 4px;
+
   cursor: default;
 }
 
@@ -374,13 +456,16 @@
 .chat-msg-meta {
   display: flex;
   align-items: baseline;
+
   margin-bottom: 2px;
+
   gap: var(--space-2);
 }
 
 .chat-msg-author {
   font-weight: 600;
   font-size: 14px;
+
   color: var(--text-primary);
 }
 
@@ -392,30 +477,48 @@
 .chat-msg-text {
   font-size: 14px;
   line-height: 1.5;
+
   color: var(--text-primary);
+
   white-space: pre-wrap;
   word-break: break-word;
+
   padding: 8px 12px;
+
   border-radius: var(--radius-md);
+
   display: inline-block;
+
   margin-top: 2px;
+
+  max-width: min(70%, 600px);
 }
 
-/* Incoming Messages */
+/* =========================================================
+   Incoming Messages
+   ========================================================= */
+
 .chat-message:not(.is-own) .chat-msg-content {
   align-items: flex-start;
+
   display: flex;
   flex-direction: column;
 }
 
 .chat-message:not(.is-own) .chat-msg-text {
   background-color: var(--surface-subtle);
+
   border: 1px solid var(--border-subtle);
+
   color: var(--text-primary);
+
   border-top-left-radius: 2px;
 }
 
-/* Own Messages */
+/* =========================================================
+   Own Messages
+   ========================================================= */
+
 .chat-message.is-own {
   flex-direction: row-reverse;
 }
@@ -426,13 +529,16 @@
 
 .chat-message.is-own .chat-msg-content {
   align-items: flex-end;
+
   display: flex;
   flex-direction: column;
 }
 
 .chat-message.is-own .chat-msg-text {
   background-color: var(--accent-600);
+
   color: var(--text-inverse);
+
   border-top-right-radius: 2px;
 }
 
@@ -444,19 +550,32 @@
   display: none;
 }
 
-/* Hover Actions on Messages */
+/* =========================================================
+   Hover Actions on Messages
+   ========================================================= */
+
 .chat-msg-actions {
   opacity: 0;
+
   position: absolute;
+
   top: -12px;
   right: var(--space-6);
+
   background: var(--surface-main);
+
   border: 1px solid var(--border-subtle);
+
   border-radius: var(--radius-sm);
+
   box-shadow: var(--shadow-hover);
+
   display: flex;
+
   padding: 2px;
+
   transition: opacity 100ms;
+
   z-index: 10;
 }
 
@@ -472,10 +591,15 @@
 .chat-msg-actions button {
   background: transparent;
   border: none;
+
   padding: 4px;
+
   border-radius: var(--radius-xs);
+
   color: var(--text-secondary);
+
   cursor: pointer;
+
   display: flex;
   align-items: center;
 }
@@ -485,75 +609,147 @@
   color: var(--text-primary);
 }
 
-
 /* =========================================================
    COMPOSER
    ========================================================= */
+
 .chat-composer-wrap {
-  padding: 0 var(--space-6) var(--space-6) var(--space-6);
+  padding: 0 var(--space-6) var(--space-6);
+
   background-color: var(--surface-main);
+
   flex-shrink: 0;
 }
 
 .chat-composer-box {
+  width: 100%;
+  box-sizing: border-box;
+
   background-color: var(--surface-main);
+
   border: 1px solid var(--border-strong);
+
   border-radius: 24px;
+
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+
   padding: 8px 12px;
+
+  gap: 4px;
+
   transition: border-color var(--duration-fast);
-  gap: 8px;
 }
 
 .chat-composer-box:focus-within {
   border-color: var(--accent-600);
 }
 
+/* =========================================================
+   Composer Input
+   ========================================================= */
+
 .chat-composer-input {
   flex: 1;
+  min-width: 0;
+
   border: none;
+
   resize: none;
-  padding: 8px 0;
+
+  padding: 8px 4px;
+
   font-family: inherit;
+
   font-size: 14px;
+
   line-height: 1.5;
+
   color: var(--text-primary);
+
   background: transparent;
+
   outline: none;
+
   max-height: 120px;
+
+  overflow-y: auto;
 }
 
 .chat-composer-input::placeholder {
   color: var(--text-tertiary);
 }
 
-.chat-composer-btn.icon-btn {
-  padding: 8px;
-  margin-bottom: 2px;
-  color: var(--text-secondary);
-}
+/* =========================================================
+   Composer Buttons
+   ========================================================= */
 
-.chat-send-btn {
+.chat-composer-btn {
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background: transparent;
+
+  border: none;
+
+  color: var(--text-secondary);
+
+  padding: 8px;
+
+  border-radius: var(--radius-sm);
+
+  cursor: pointer;
+}
+
+.chat-composer-btn:hover {
+  background-color: var(--surface-subtle);
+
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   Send Button
+   ========================================================= */
+
+.chat-send-btn {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 36px;
   height: 36px;
+
   border-radius: 50%;
+
   border: none;
+
   background-color: var(--accent-600);
+
   color: white;
+
   cursor: pointer;
+
   margin-bottom: 2px;
-  flex-shrink: 0;
-  transition: background-color 0.2s;
+
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
 }
 
 .chat-send-btn:disabled {
   background-color: var(--surface-subtle);
+
   color: var(--text-tertiary);
+
   cursor: not-allowed;
 }
 
@@ -561,61 +757,51 @@
   background-color: var(--accent-700);
 }
 
-.chat-composer-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  padding: 4px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.chat-composer-btn:hover {
-  background: var(--border-subtle);
-  color: var(--text-primary);
-}
-
-
 /* =========================================================
-   EMPTY STATE (no group selected)
+   EMPTY STATE
    ========================================================= */
+
 .chat-empty-state {
   flex: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   background-color: var(--surface-subtle);
 }
 
 .chat-empty-state-inner {
   text-align: center;
+
   color: var(--text-tertiary);
 }
 
 .chat-empty-state-inner h2 {
-  font-family: ui-serif, Georgia, Cambria,
-    "Times New Roman", Times, serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
   font-size: 24px;
+
   font-weight: 400;
+
   color: var(--text-primary);
+
   margin: var(--space-4) 0 var(--space-2) 0;
 }
 
 .chat-empty-state-inner p {
   font-size: 14px;
+
   color: var(--text-secondary);
+
   margin: 0 0 var(--space-6) 0;
 }
-
 
 /* =========================================================
    RESPONSIVE — Mobile
    ========================================================= */
-@media (max-width: 768px) {
 
+@media (max-width: 768px) {
   .chats-left-panel {
     width: 100%;
   }
@@ -625,6 +811,7 @@
   }
 
   /* When a chat is open on mobile, swap panels */
+
   .chats-layout.mobile-show-chat .chats-left-panel {
     display: none;
   }
@@ -633,17 +820,29 @@
     display: flex;
   }
 
+  /* Mobile back button */
+
   .chat-mobile-back {
     display: flex;
+
     align-items: center;
+
     gap: var(--space-2);
+
     padding: var(--space-3) var(--space-4);
+
     background: transparent;
+
     border: none;
+
     border-bottom: 1px solid var(--border-subtle);
+
     color: var(--accent-600);
+
     font-size: 14px;
+
     font-weight: 500;
+
     cursor: pointer;
   }
 
@@ -651,9 +850,13 @@
     background-color: var(--surface-subtle);
   }
 
+  /* Header */
+
   .chat-area-header {
     padding: 0 var(--space-4);
   }
+
+  /* Messages */
 
   .chat-messages-area {
     padding: var(--space-4) 0;
@@ -663,7 +866,28 @@
     padding: 4px var(--space-4);
   }
 
+  .chat-msg-text {
+    max-width: 80%;
+  }
+
+  /* Composer */
+
   .chat-composer-wrap {
-    padding: 0 var(--space-4) var(--space-4) var(--space-4);
+    padding: 0 var(--space-4) var(--space-4);
+  }
+
+  .chat-composer-box {
+    padding: 6px 8px;
+    gap: 2px;
+  }
+
+  .chat-composer-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .chat-send-btn {
+    width: 34px;
+    height: 34px;
   }
 }

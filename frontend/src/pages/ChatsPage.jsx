@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import ChatComposer from "./ChatComposer";
 import {
   connectWebSocket,
   sendMessage as wsSendMessage,
@@ -191,7 +192,7 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
    if(chatContainRef.current){
     chatContainRef.current.scrollTo({
       top: chatContainRef.current.scrollHeight,
-      behaviour: "smooth"
+      behavior: "smooth"
     });
    }
   }, [messages]);
@@ -296,35 +297,11 @@ function ChatArea({ group, messages, connectionStatus, onSendMessage, userName }
       </div>
 
       {/* Composer */}
-      <div className="chat-composer-wrap">
-        <div className="chat-composer-box">
-          <button className="chat-composer-btn icon-btn" title="Attach file">
-            <Paperclip size={20} />
-          </button>
-          <button className="chat-composer-btn icon-btn" title="Add emoji">
-            <Smile size={20} />
-          </button>
-
-          <textarea
-            ref={textareaRef}
-            className="chat-composer-input"
-            placeholder={`Message ${group.route.split(" → ")[0]}...`}
-            value={inputText}
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            rows={1}
-          />
-          
-          <button
-            className="chat-send-btn"
-            onClick={handleSend}
-            disabled={!inputText.trim() || !connected}
-            title="Send message"
-          >
-            <Send size={18} />
-          </button>
-        </div>
-      </div>
+      <ChatComposer
+  placeholder={`Message ${group.route.split(" → ")[0]}...`}
+  connected={connected}
+  onSendMessage={onSendMessage}
+/>
     </div>
   );
 }
