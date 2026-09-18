@@ -30,6 +30,8 @@ import HelpFaqPage from './pages/HelpFaqPage'
 import CampusRulesPage from './pages/CampusRulesPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import TermsConditionsPage from './pages/TermsConditionsPage'
 function App() {
   
 
@@ -62,6 +64,8 @@ function App() {
              <Route path='/campus-rules' element={<CampusRulesPage />} />
              <Route path='/about' element={<AboutPage />} />
              <Route path='/contact' element={<ContactPage />} />
+             <Route path='/privacy' element={<PrivacyPolicyPage />} />
+             <Route path='/terms' element={<TermsConditionsPage />} />
         </Route>
        
         

@@ -170,11 +170,11 @@ function SettingsPage() {
                         <span className="st-link-label">Contact Support</span>
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
-                    <button className="st-link-row">
+                    <button className="st-link-row" onClick={() => navigate('/privacy')}>
                         <span className="st-link-label">Privacy Policy</span>
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
-                    <button className="st-link-row">
+                    <button className="st-link-row" onClick={() => navigate('/terms')}>
                         <span className="st-link-label">Terms & Conditions</span>
                         <ChevronRight size={16} className="st-link-chevron" />
                     </button>
