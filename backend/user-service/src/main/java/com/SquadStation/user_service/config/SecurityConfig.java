@@ -26,7 +26,7 @@ public class SecurityConfig {
                         auth-> auth.requestMatchers
                                         ("/api/users/signup", "/api/users/login","/api/users/verify-otp" ,
                                                 "/api/users/refresh-token"
-                                        ,"/swagger-ui/**","/v3/api-docs/**")
+                                        ,"/swagger-ui.html","/swagger-ui/**","/v3/api-docs/**")
                         .permitAll()
                                 .requestMatchers("/api/internal/**").hasRole("INTERNAL_SERVICE")
                                 .anyRequest().authenticated())
