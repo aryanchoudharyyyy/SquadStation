@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Mail, ArrowRight, Compass } from "lucide-react";
+import { Mail, Compass } from "lucide-react";
+import { sendOtp } from "../api/authApi";
 import "../styles/Auth.css";
 
 function Login() {
@@ -8,14 +9,27 @@ function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
-    if (email.includes("@")) {
+     if (!email.includes("@")) {
+        setError("Please enter a valid college email address!");
+        return;
+    }
+    try {
       setError("");
-      console.log("Submitting email: " + email);
-      navigate("/otpVerification");
-    } else {
-      setError("Please enter a valid college email address!");
+      const response = await sendOtp(email);
+      console.log("OTP sent:", response.data);
+      navigate("/otpVerification", {
+        state: { email }
+      });
+      
+    } catch (error) {
+       console.log(error);
+
+        setError(
+            error.response?.data?.message ||
+            "Failed to send OTP. Please try again."
+        );
     }
   }
 
