@@ -8,8 +8,8 @@ services:
     image: postgres:15
     container_name: postgres-db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       # Aap chahein toh specific databases bash script se bana sakte hain,
       # ya Hibernate auto-ddl se manage kar lenge
     ports:
