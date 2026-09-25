@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🚀 SquadStation</h1>
+  <h1>🚀 CollegeTravel</h1>
   <p><strong>A Next-Generation Microservices Backend Platform for Travel & Community</strong></p>
 
   <p>
@@ -12,11 +12,11 @@
 
 ---
 
-## 📖 What is SquadStation?
+## 📖 What is CollegeTravel?
 
-**SquadStation** is a robust, scalable backend platform designed to bring travelers together. Built on a fully decoupled microservices architecture, it solves the problem of finding travel companions by using intelligent trip-matching algorithms. 
+**CollegeTravel** is a robust, scalable backend platform designed to bring travelers together. Built on a fully decoupled microservices architecture, it solves the problem of finding travel companions by using intelligent trip-matching algorithms. 
 
-Whether users are commuting, going on long trips, or attending events, SquadStation allows them to:
+Whether users are commuting, going on long trips, or attending events, CollegeTravel allows them to:
 - **Match** with users who have overlapping travel schedules and routes.
 - **Form Groups** to travel together safely.
 - **Chat in Real-Time** with group members to coordinate plans.
@@ -37,7 +37,7 @@ Whether users are commuting, going on long trips, or attending events, SquadStat
 
 ## 🏛️ System Architecture
 
-SquadStation is composed of multiple specialized microservices that communicate seamlessly:
+CollegeTravel is composed of multiple specialized microservices that communicate seamlessly:
 
 * **API Gateway (`api-gateway`)**: The single entry point for all client requests. Handles load balancing and routes traffic to internal microservices (`/api/users/**`, `/api/trips/**`, etc.).
 * **Service Discovery (`EurekaService`)**: Powered by Netflix Eureka. Allows all microservices to dynamically register and discover each other without hardcoded IP addresses.
@@ -74,13 +74,13 @@ SquadStation is composed of multiple specialized microservices that communicate 
 ### 2. Database Setup
 Log in to your PostgreSQL instance and run:
 ```sql
-CREATE DATABASE squadstation_db;
+CREATE DATABASE collegetravel_db;
 ```
 
 ### 3. Clone the Repository
 ```bash
-git clone https://github.com/aryanchoudharyyyy/SquadStation.git
-cd SquadStation
+git clone https://github.com/aryanchoudharyyyy/CollegeTravel.git
+cd CollegeTravel
 ```
 
 ### 4. Running the Microservices

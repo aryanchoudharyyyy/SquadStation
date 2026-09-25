@@ -8,7 +8,7 @@
 		<version>3.5.16</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.SquadStation</groupId>
+	<groupId>com.CollegeTravel</groupId>
 	<artifactId>marketplace-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>

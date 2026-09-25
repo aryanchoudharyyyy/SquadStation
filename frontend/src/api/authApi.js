@@ -7,6 +7,6 @@ export const login = (data) => {
 export const signup = (data) => {
     return apiClient.post("api/users/signup", data);
 };
-export const sendOtp = (email) => {
-    return apiClient.post("api/users/verify-otp", {email});
+export const sendOtp = (collegeEmail) => {
+    return apiClient.post("api/users/login", {collegeEmail});
 };

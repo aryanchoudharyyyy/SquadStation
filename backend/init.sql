@@ -1,5 +1,5 @@
-CREATE DATABASE squadstation_users;
-CREATE DATABASE squadstation_trips;
-CREATE DATABASE squadstation_groups;
-CREATE DATABASE squadstation_chat;
-CREATE DATABASE squadstation_marketplace;
+CREATE DATABASE collegetarvel_users;
+CREATE DATABASE collegetravel_trips;
+CREATE DATABASE collegetravel_groups;
+CREATE DATABASE collegetravel_chat;
+CREATE DATABASE collegetravel_marketplace;

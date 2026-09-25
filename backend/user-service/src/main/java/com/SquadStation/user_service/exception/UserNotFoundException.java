@@ -1,9 +1,0 @@
-package com.SquadStation.user_service.exception;
-
-import org.springframework.http.HttpStatus;
-
-public class UserNotFoundException extends BaseApiException {
-    public UserNotFoundException(String message) {
-        super(message, HttpStatus.NOT_FOUND);
-    }
-}

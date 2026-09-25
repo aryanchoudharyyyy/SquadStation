@@ -48,6 +48,7 @@ spring:
               predicates:
                 - Path=/api/internal/marketplace/**
 
+
 eureka:
   client:
     service-url:
